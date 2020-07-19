@@ -16,7 +16,6 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-        </style>
     </head>
     <body class="hold-transition register-page">
     <div class="register-box">
