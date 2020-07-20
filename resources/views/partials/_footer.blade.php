@@ -1,39 +1,60 @@
-<footer class="site-footer" style="background-image: url('{{ asset('web_asset') }}/images/hero_bg_footer.jpg')">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-3">
-          <h2 class="footer-heading mb-4">About Us</h2>
-          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
-          <ul class="list-unstyled social">
-            <li><a href="#"><span class="icon-facebook"></span></a></li>
-            <li><a href="#"><span class="icon-instagram"></span></a></li>
-            <li><a href="#"><span class="icon-twitter"></span></a></li>
-            <li><a href="#"><span class="icon-linkedin"></span></a></li>
-          </ul>
-        </div>
-        <div class="col-lg-8 ml-auto">
+<footer class="footer">
+  <div class="footer_top">
+      <div class="container">
           <div class="row">
-            <div class="col-lg-3">
-              <h2 class="footer-heading mb-4">Quick Links</h2>
-              <ul class="list-unstyled">
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row pt-5 mt-5 text-center">
-        <div class="col-md-12">
-          <div class="border-top pt-5">
-            <p>
-          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-          Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
-          <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-          </p>
-          </div>
-        </div>
+              <div class="col-xl-3 col-md-6 col-lg-3">
+                  <div class="footer_widget wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
+                      <div class="footer_logo">
+                          <a href="#">
+                            <img src="{{ asset('web_asset') }}/img/logo.png" alt="">
+                          </a>
+                      </div>
+                      <p>
+                          email@its.ac.id <br>
+                          Kampus ITS, Sukolilo, Jl. Raya ITS, Keputih, Surabaya, Kota SBY, Jawa Timur 60117
+                      </p>
+                      <div class="socail_links">
+                          <ul>
+                              <li>
+                                  <a href="https://id-id.facebook.com/InstitutTeknologiSepuluhNopember/">
+                                      <i class="ti-facebook"></i>
+                                  </a>
+                              </li>
+                              {{-- <li>
+                                  <a href="#">
+                                      <i class="fa fa-google-plus"></i>
+                                  </a>
+                              </li> --}}
+                              <li>
+                                  <a href="https://twitter.com/its_campus">
+                                      <i class="fa fa-twitter"></i>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="https://www.instagram.com/its_campus/">
+                                      <i class="fa fa-instagram"></i>
+                                  </a>
+                              </li>
+                          </ul>
+                      </div>
 
+                  </div>
+              </div>      
+          </div>
       </div>
-    </div>
+  </div>
+  <div class="copy-right_text wow fadeInUp" data-wow-duration="1.4s" data-wow-delay=".3s">
+      <div class="container">
+          <div class="footer_border"></div>
+          <div class="row">
+              <div class="col-xl-12">
+                  <p class="copy_right text-center">
+                      <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                  </p>
+              </div>
+          </div>
+      </div>
+  </div>
 </footer>
