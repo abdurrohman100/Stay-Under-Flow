@@ -57,10 +57,10 @@
                                 </div>
                                 @else
                                 <div class="d-none d-lg-block">
-                                    <a class="boxed-btn3" href="#">Login</a>
+                                    <a class="boxed-btn3" href="/login">Login</a>
                                 </div>
                                 <div class="d-none d-lg-block">
-                                    <a class="boxed-btn3" href="#">Register</a>
+                                    <a class="boxed-btn3" href="/register">Register</a>
                                 </div>
                                 @endif
                             </div>

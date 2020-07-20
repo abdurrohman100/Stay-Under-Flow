@@ -1,58 +1,83 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layout')
 
-        <title>Register</title>
-        <!-- Bootstrap 3.3.7 -->
-        <link rel="stylesheet" type="text/css" href="{{asset('/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" type="text/css" href="{{asset('/bower_components/font-awesome/css/font-awesome.min.css')}}">
-        <!-- Ionicons -->
-        <link rel="stylesheet" type="text/css" href="{{asset('/bower_components/Ionicons/css/ionicons.min.css')}}">
-        <!-- Theme style -->
-        <link rel="stylesheet" type="text/css" href="{{asset('/dist/css/AdminLTE.min.css')}}">
+@section('title', "Login")
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    </head>
-    <body class="hold-transition register-page">
-    <div class="register-box">
-      <div class="register-logo">
-        <b>REGISTER</b>
-      </div>
+@section('stylesheets')
 
-      <div class="register-box-body">
-        <p class="login-box-msg">Register a new membership</p>
+@endsection
 
-        <form action="#" method="post">
-          <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="Username" name="username" required>
-            <span class="glyphicon glyphicon-user form-control-feedback"></span>
-          </div>
-          <div class="form-group has-feedback">
-            <input type="email" class="form-control" placeholder="Email" name="email" required>
-            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-          </div>
-          <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="Password" name="password" required>
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-          </div>
-          <div class="row">
-            <div class="col-xs-6">
-              <a href="{{ route('login') }}" style="color: white;"><button type="button" class="btn btn-primary btn-block btn-flat">Login</button></a>
+@section('content')
+<div class="job_details_area bg-its-2">
+
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-lg-offset-3" style="height: 600px;">
+                    <div class="apply_job_form white-bg mt-5">
+						<h3 style="text-align:center" class="mb-30">Register</h3>
+						<form method="POST" action="">
+                        @csrf
+                            <div class="mt-10">
+                                <input type="text" name="username" placeholder="Username"
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" required class="single-input">
+                            </div>
+                            <div class="mt-10">
+								<input type="email" name="email" placeholder="Email address"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" required class="single-input">
+							</div>
+							<div class="mt-10">
+								<input type="password" name="password" placeholder="Password" 
+									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required class="single-input">
+                            </div>
+                            <div class="mt-10">
+								<input type="password" name="password" placeholder="Password Confirmation" 
+									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Retype Password'" required class="single-input">
+							</div>
+                            
+                            <div class="mt-10">
+                                
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <button type="button" id="inputGroupFileAddon03"><i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                                      </button>
+                                    </div>
+                                    <div class="custom-file">
+                                      <input type="file" class="custom-file-input" name="berkas" id="berkas" accept=".jpeg,.png,.jpg,.gif,.svg" aria-describedby="inputGroupFileAddon03">
+                                      <label class="custom-file-label" id='idberkas'for="logo">Upload Image</label>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="input-group-icon mt-10">
+                                <div class="col-lg">
+                                    <div class="text-center">
+                                        
+                                        <button type="submit" class="btn btn-block btn-primary">
+                                            {{ __('Register') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row mt-4">
+                            <div class="col text-center">
+                                Sudah punya akun? <a href="#">Login disini!</a>
+                            </div>
+                        </div>
+                        
+					</div>
+                </div>
             </div>
-            <div class="col-xs-6">
-              <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
-            </div>
-            <!-- /.col -->
-          </div>
-        </form>
-
-      </div>
-      <!-- /.form-box -->
+        </div>
     </div>
-    <!-- /.register-box -->
-    </body>
-</html>
+
+@endsection
+
+@section('scripts')
+    {{--  --}}
+    <script type="application/javascript">
+        $('#berkas').change(function(e2){
+            var fileName2 = e2.target.files[0].name;
+            // dd(fileName2);
+            $('#idberkas').html(fileName2);
+        });
+    </script>
+@endsection
