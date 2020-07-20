@@ -9,7 +9,7 @@ class Users extends Model
     //
     
     protected $primarykey='user_id';
-
+    // public $timestamps = false;
     public function answers()
     {
         return $this->hasMany('App\Answers', 'answer_user_id','user_id');

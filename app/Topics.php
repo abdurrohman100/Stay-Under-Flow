@@ -8,6 +8,7 @@ class Topics extends Model
 {
     //
     protected $primarykey='topic_id';
+    public $timestamps = false;
     public function discuss()
     {
         return $this->hasMany('App\Discuss', 'discuss_topic_id', 'topic_id');
