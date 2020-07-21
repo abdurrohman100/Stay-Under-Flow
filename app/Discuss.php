@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Discuss extends Model
 {   
+    protected $table='discuss';
     protected $primarykey='discuss_id';
-    public function questions()
-    {
-        return $this->hasOne('App\Questions', 'question_disscus_id', 'discuss_id');
-    }
+    protected $fillable = array('discuss_name', 'discuss_user_id',
+                                 'discuss_topic_id','discuss_status',
+                                 'discuss_content','discuss_title');
     public function answers()
     {
         return $this->hasMany('App\Answers', 'answer_discuss_id', 'disscus_id');

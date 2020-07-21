@@ -84,19 +84,12 @@
               </a>
           </li>
           <li class="nav-item">
-            <a href="/user" class="nav-link {{ Request::is('user') ? "active" : "" }}">
+            <a href="/user/{{ Session::get('id')}}" class="nav-link {{ Request::is('user') ? "active" : "" }}">
               <i class="fa fa-user nav-icon"></i>
               <p>My Profile</p>
             </a>
           </li>
-
-          {{-- <li class="nav-item">
-            <a href="/myquestion" class="nav-link {{ Request::is('myquestion') ? "active" : "" }}">
-              <i class="fa fa-question nav-icon"></i>
-              <p>My Question</p>
-            </a>
-          </li> --}}
-          <li class="nav-item has-treeview menu-open">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link
             {{ Request::is('myquestion') ? "active" : "" }}
             {{ Request::is('create-discussion') ? "active" : "" }}

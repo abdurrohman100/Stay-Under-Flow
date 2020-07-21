@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Users;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Hash;
+use Session;
+use App\Discuss;
 class UsersController extends Controller
 {
     /**
@@ -39,7 +41,7 @@ class UsersController extends Controller
         Users::create([
             'user_name' => $request->username,
             'user_email' => $request->email,
-            'user_password' => $request->password,
+            'user_password' => Hash::make($request->password),
             'user_description' => $request->description
         ]);
         return redirect()->back();
@@ -47,12 +49,45 @@ class UsersController extends Controller
 
     public function login_users(Request $request)
     {
-        $task = Users::where('user_email', $request->email) -> where('user_password', $request->password) -> count();
-        if($task == 1){
-            $session_data = Users::where('user_email', $request->email) -> where('user_password', $request->password) -> first();
-            return view('dashboards.dashboard', compact('session_data'));
+        // $task = Users::where('user_email', $request->email) -> where('user_password', $request->password) -> count();
+        // if($task == 1){
+        //     $session_data = Users::where('user_email', $request->email) -> where('user_password', $request->password) -> first();
+        //     return view('dashboards.dashboard', compact('session_data'));
+        // }
+        // return redirect()->route('login');
+
+        $task=Users::where('user_email', $request->email)->first();
+        if($task){
+            if(Hash::check($request->input('password'),$task->user_password)){
+                $request->session()->put([
+                    'login' => true,
+                    'id' => $task->user_id,
+                    'name' => $task->user_name,
+                    'email' => $task->user_email,
+                    'desc' => $task->user_description,
+                    'joined' => $task->created_at,
+                ]);
+                Session::flash('success', 'Anda berhasil Login');
+                return redirect('dashboard');
+            }else{
+                Session::flash('error', 'Password tidak cocok');
+                return redirect('login');
+            }
+        }else{
+            Session::flash('error', 'Akun anda tidak ditemukan');
+            return redirect('register');
         }
-        return redirect()->route('login');
+
+    }
+    public function createListOwnProfile(Request $request,$userId){
+        $userData=Users::where('user_id',$userId)->get();
+        // dd($userData);
+        $discussList=$userData->first()->discuss;
+        // dd($discussList);
+        // $discussList=Discuss::where('discuss_user_id', $userId)->get();
+        $discussCount=$discussList->count();
+        // dd($discussCount);
+        return view('dashboards.userprofile',compact('userData','discussList','discussCount'));
     }
 
     /**

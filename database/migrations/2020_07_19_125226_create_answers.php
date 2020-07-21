@@ -18,7 +18,7 @@ class CreateAnswers extends Migration
             $table->foreignId('answer_user_id');
             $table->foreignId('answer_discuss_id');
             $table->string('answer_content', 255);
-            $table->string('answer_status', 1);
+            $table->string('answer_status', 1)->default('0');
             $table->timestamps();
             $table->foreign('answer_user_id')->references('user_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('answer_discuss_id')->references('discuss_id')->on('discuss')->onDelete('cascade')->onUpdate('cascade');

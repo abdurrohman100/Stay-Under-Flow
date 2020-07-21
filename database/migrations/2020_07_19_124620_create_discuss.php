@@ -17,7 +17,9 @@ class CreateDiscuss extends Migration
             $table->bigIncrements('discuss_id');
             $table->foreignId('discuss_user_id');
             $table->foreignId('discuss_topic_id');
-            $table->string('discuss_status', 1);
+            $table->string('discuss_title');
+            $table->string('discuss_status', 1)->default('0');
+            $table->string('discuss_content');
             $table->timestamps();
             $table->foreign('discuss_user_id')->references('user_id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('discuss_topic_id')->references('topic_id')->on('topics')->onDelete('cascade')->onUpdate('cascade');

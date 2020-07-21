@@ -10,9 +10,10 @@
 {{-- main content --}}
 
 <section class="content">
+   
 
   <div class="container-fluid">
-      <form method="POST" role="form" id="quickForm" action="">
+  <form method="POST" role="form" id="quickForm" action="{{ route('create-discussion') }}">
       @csrf
       <div class="row justify-content-center">
           <div class="col-lg-6">
@@ -30,7 +31,7 @@
 
                       <div class="form-group">
                           <label for="inputKategori">Topics</label>
-                          <select name="category" class="form-control" id="inputKategori">
+                          <select name="topic" class="form-control" id="inputKategori">
                               @php
                                   $listTopics=App\Topics::all();
                               @endphp

@@ -26,6 +26,7 @@
   
     <div class="content-wrapper">
         @include('dashboards.partials._contents-header')
+        @include('dashboards.partials._error')
         {{-- @include('partials._messages') --}}
         @yield('content')
     </div>

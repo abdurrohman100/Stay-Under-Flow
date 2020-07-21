@@ -42,8 +42,8 @@
           <li class="user-header bg-primary">
             <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
             <p>
-              Alexander Pierce - Web Developer
-              <small>Member since Nov. 2012</small>
+              {{ Session::get('name') }}
+              <small>Member since {{ Session::get('joined') }}</small>
             </p>
           </li>
           <!-- Menu Body -->

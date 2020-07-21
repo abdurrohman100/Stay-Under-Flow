@@ -19,6 +19,7 @@
             <div class="card-body">
               <ul class="products-list product-list-in-box">
                 
+                @foreach ($discussList as $discus)
                 <li class="item">
                   <div class="card">
                     <div class="card-body">
@@ -26,43 +27,26 @@
                         <img src="{{asset('/dist/img/user.jpg')}}" alt="Product Image">
                       </div>
                       <div class="product-info">
-                        <a href="{{ route('discussion') }}" class="product-title">What is mountain?
-                          <span class="badge badge-pill badge-danger float-right">Unsolved</span>
+                        <a href="#" class="product-title">{{ $discus->discuss_title }}
+                          
+                          @if ($discus->discuss_status=='1')
+                            <span class="badge badge-pill badge-success float-right">
+                              Solved
+                            </span>
+                          @else
+                            <span class="badge badge-pill badge-danger float-right">
+                              Unsolved
+                            </span>
+                          @endif
                         </a>
-                        <span class="product-description">
-                              Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.abnfadasda
-                              asdasdasdasdasda
-                              adadaasd Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae harum, assumenda exercitationem 
-                              aliquid nobis magnam architecto praesentium reprehenderit provident temporibus vel cumque explicabo ducimus 
-                              unde voluptatum at totam incidunt voluptate!
-                        </span>
+                        <span class="product-description">{{ $discus->discuss_content  }}</span>
                       </div>
                     </div>
 
                   </div>
                 </li>
-                <li class="item">
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="product-img">
-                        <img src="{{asset('/dist/img/user.jpg')}}" alt="Product Image">
-                      </div>
-                      <div class="">
-                        <a href="{{ route('discussion') }}" class="product-title">Mada Mada?
-                          <span class="badge badge-pill badge-success float-right">Solved</span>
-                        </a>
-                        <span class="product-description">
-                              Far far away, behind the word mountains, far from the countries Vokalia and Consonantia.abnfadasda
-                              asdasdasdasdasda
-                              adadaasd Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae harum, assumenda exercitationem 
-                              aliquid nobis magnam architecto praesentium reprehenderit provident temporibus vel cumque explicabo ducimus 
-                              unde voluptatum at totam incidunt voluptate!
-                        </span>
-                      </div>
-                    </div>
-
-                  </div>
-                </li>
+                @endforeach
+                
                 <!-- /.item -->
               </ul>
             </div>
