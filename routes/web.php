@@ -15,8 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@homeview');
 Route::get('/login', function () {return view('login');}) -> name('login');
-//Route::get('/login2', function () {return view('login2');}) -> name('login');
-//Route::get('/register2', function () {return view('register2');}) -> name('register');
 Route::get('/register', function () {return view('register');}) -> name('register');
 Route::get('/user', function () {return view('dashboards.userprofile');}) -> name('userprofile') ;
 
@@ -28,6 +26,7 @@ Route::post('/login_users', 'UsersController@login_users')->name('login_users');
     Route::get('/dashboard', function () {return view('dashboards.dashboard');}) -> name('dashboard');
     Route::get('/myquestion', function () {return view('dashboards.myquestion');}) -> name('myquestion');
     Route::get('/myanswer', function () {return view('dashboards.myanswer');}) -> name('myanswer');
+    Route::get('/create-discussion', function () {return view('dashboards.create-discussion');});
     
 // });
 

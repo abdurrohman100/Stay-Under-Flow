@@ -8,7 +8,7 @@
 
 </head>
 
-<body class="hold-transition skin-yellow sidebar-mini">
+<body class="hold-transition skin-yellow sidebar-mini layout-fixed">
 
 <div class="wrapper">
 
@@ -21,7 +21,11 @@
   
 
     {{-- content --}}
+    
+  <!-- Content Wrapper. Contains page content -->
+  
     <div class="content-wrapper">
+        @include('dashboards.partials._contents-header')
         {{-- @include('partials._messages') --}}
         @yield('content')
     </div>
