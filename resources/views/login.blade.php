@@ -14,7 +14,7 @@
                 <div class="col-lg-6 col-lg-offset-3" style="height: 600px;">
                     <div class="apply_job_form white-bg mt-5">
 						<h3 style="text-align:center" class="mb-30">Login</h3>
-						<form method="POST" action="">
+						<form method="POST" action="{{ route('login_users') }}">
                         @csrf
 							<div class="mt-10">
 								<input type="email" name="email" placeholder="Email address"
@@ -37,7 +37,7 @@
                         </form>
                         <div class="row mt-4">
                             <div class="col text-center">
-                                Belum punya akun? <a href="/register-st">Daftar disini!</a>
+                                Belum punya akun? <a href="/register">Daftar disini!</a>
                             </div>
                         </div>
                         

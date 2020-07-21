@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', "Login")
+@section('title', "Register")
 
 @section('stylesheets')
 
@@ -14,7 +14,7 @@
                 <div class="col-lg-6 col-lg-offset-3" style="height: 600px;">
                     <div class="apply_job_form white-bg mt-5">
 						<h3 style="text-align:center" class="mb-30">Register</h3>
-						<form method="POST" action="">
+						<form method="POST" action="{{ route('store_users') }}">
                         @csrf
                             <div class="mt-10">
                                 <input type="text" name="username" placeholder="Username"
@@ -32,20 +32,7 @@
 								<input type="password" name="password" placeholder="Password Confirmation" 
 									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Retype Password'" required class="single-input">
 							</div>
-                            
-                            <div class="mt-10">
-                                
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                      <button type="button" id="inputGroupFileAddon03"><i class="fa fa-cloud-upload" aria-hidden="true"></i>
-                                      </button>
-                                    </div>
-                                    <div class="custom-file">
-                                      <input type="file" class="custom-file-input" name="berkas" id="berkas" accept=".jpeg,.png,.jpg,.gif,.svg" aria-describedby="inputGroupFileAddon03">
-                                      <label class="custom-file-label" id='idberkas'for="logo">Upload Image</label>
-                                    </div>
-                                  </div>
-                            </div>
+                            <input type="hidden" name="description" value="Give some description">
                             <div class="input-group-icon mt-10">
                                 <div class="col-lg">
                                     <div class="text-center">
@@ -59,7 +46,7 @@
                         </form>
                         <div class="row mt-4">
                             <div class="col text-center">
-                                Sudah punya akun? <a href="#">Login disini!</a>
+                                Sudah punya akun? <a href="/login">Login disini!</a>
                             </div>
                         </div>
                         

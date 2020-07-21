@@ -8,6 +8,7 @@ class Users extends Model
 {
     //
     
+    protected $fillable = ['user_name','user_email','user_password','user_description'];
     protected $primarykey='user_id';
     // public $timestamps = false;
     public function answers()

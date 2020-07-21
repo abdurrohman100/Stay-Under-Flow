@@ -36,7 +36,23 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Users::create([
+            'user_name' => $request->username,
+            'user_email' => $request->email,
+            'user_password' => $request->password,
+            'user_description' => $request->description
+        ]);
+        return redirect()->back();
+    }
+
+    public function login_users(Request $request)
+    {
+        $task = Users::where('user_email', $request->email) -> where('user_password', $request->password) -> count();
+        if($task == 1){
+            $session_data = Users::where('user_email', $request->email) -> where('user_password', $request->password) -> first();
+            return view('dashboards.dashboard', compact('session_data'));
+        }
+        return redirect()->route('login');
     }
 
     /**

@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@homeview');
 Route::get('/login', function () {return view('login');}) -> name('login');
-Route::get('/login2', function () {return view('login2');}) -> name('login');
-Route::get('/register2', function () {return view('register2');}) -> name('login');
+//Route::get('/login2', function () {return view('login2');}) -> name('login');
+//Route::get('/register2', function () {return view('register2');}) -> name('register');
 Route::get('/register', function () {return view('register');}) -> name('register');
 Route::get('/user', function () {return view('dashboards.userprofile');}) -> name('userprofile') ;
 
+Route::post('/store_users', 'UsersController@store')->name('store_users');
+Route::post('/login_users', 'UsersController@login_users')->name('login_users');
 
 // Route::group(['middleware' => ['Auth']], function () {
     Route::get('/discussion', function () {return view('dashboards.discussion');}) -> name('discussion');
