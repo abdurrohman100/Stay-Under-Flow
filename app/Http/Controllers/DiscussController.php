@@ -49,10 +49,33 @@ class DiscussController extends Controller
     }
     public function discussion(Request $request,$dis_id ){
         $discussion=Discuss::where('discuss_id',$dis_id)->first();
+        
         $answer=Answers::where('answer_discuss_id',$dis_id)->get()->sortBy('created_at');
         // dd($answer);
         return view('dashboards.discussion',compact('discussion','answer'));
     }
+
+    public function editDiscussion(Request $request,$disc_id){
+        // dd($request->input('pertanyaan'));
+        // $discuss= Discuss::where('discuss_id',$disc_id)->limit(1);
+        $discuss= Discuss::find($disc_id);
+        $discuss->discuss_title= $request->input('judul');
+        $discuss->discuss_topic_id= $request->input('topic');
+        $discuss->discuss_status= $request->input('status');
+        $discuss->discuss_content= $request->input('pertanyaan');
+        $discuss->save();
+        return back();
+
+    }
+    public function deleteDiscussion(Request $request,$disc_id){
+        // dd($request->input('pertanyaan'));
+        // $discuss= Discuss::where('discuss_id',$disc_id)->limit(1);
+        $discuss= Discuss::find($disc_id);
+        $discuss->delete();
+        return back();
+
+    }
+    
     
 
 

@@ -38,6 +38,8 @@ Route::group(['middleware' => 'LoginCheck'], function () {
     Route::post('/discussion/{id}', 'AnswersController@sendAnswer')->name('reply');
     Route::get('/dashboard', 'DiscussController@recentList') -> name('dashboard');
     Route::get('/myquestion', 'DiscussController@createList') -> name('myquestion');
+    Route::put('/myquestion/edit/{id}', 'DiscussController@editDiscussion') -> name('myquestion-edit');
+    Route::get('/myquestion/hapus/{id}', 'DiscussController@deleteDiscussion') -> name('myquestion-delete');
     Route::get('/myanswer', function () {return view('dashboards.myanswer');}) -> name('myanswer');
     Route::get('/create-discussion', function () {return view('dashboards.create-discussion');});
     Route::post('/create-discussion', 'DiscussController@createDiscussion') -> name('create-discussion');

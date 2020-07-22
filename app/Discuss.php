@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Discuss extends Model
 {   
     protected $table='discuss';
-    protected $primarykey='discuss_id';
+    protected $primaryKey='discuss_id';
     protected $fillable = array('discuss_name', 'discuss_user_id',
                                  'discuss_topic_id','discuss_status',
                                  'discuss_content','discuss_title');

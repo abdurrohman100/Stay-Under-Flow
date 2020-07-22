@@ -9,22 +9,21 @@
 <section class="content">
     <div class="row">
       <div class="col-md-12">
-        @php
-            
-            // dd($discussion);
-        @endphp
         <div class="card card-widget">
           <div class="card-header">
             <div class="user-block">
               <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image">
-              <span class="username"><a href="#">{{ $discussion->discuss_title }}</a></span>
-              <span class="description">Shared publicly - {{$discussion->created_at}}</span>
+              <span class="username"><a href="/discussion/{{ $discussion->discuss_id }}">{{ $discussion->discuss_title }}</a></span>
+              <span class="description">Shared publicly - {{$discussion->created_at}} by 
+                <a href="user/{{$discussion->discuss_user_id}}">{{$discussion->users->user_name}}</a>
+              </span>
             </div>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
             <!-- post text -->
             <p>{{$discussion->discuss_content}}</p>
+            
 
 
             <!-- Attachment -->
@@ -43,8 +42,6 @@
               <!-- /.attachment-pushed -->
             </div> --}}
             <!-- /.attachment-block -->
-
-            <!-- Social sharing buttons -->
             <span class="float-right text-muted">{{ isset($answer)? $answer->count() : "0"}} comments</span>
           </div>
           <!-- /.card-body -->
@@ -81,9 +78,6 @@
           </div>
           <!-- /.card-footer -->
         </div>
-
-
-      
       </div>
       <!-- /.col -->
     </div>

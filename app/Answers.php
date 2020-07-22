@@ -8,7 +8,7 @@ class Answers extends Model
 {
     //
     protected $table='answers';
-    protected $primarykey='answer_id';
+    protected $primaryKey='answer_id';
     protected $fillable = array('answer_user_id','answer_discuss_id','answer_content','answer_status');
     
     public function discuss()

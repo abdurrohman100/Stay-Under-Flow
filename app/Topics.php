@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Topics extends Model
 {
     //
-    protected $primarykey='topic_id';
+    protected $primaryKey='topic_id';
     public $timestamps = false;
     public function discuss()
     {
