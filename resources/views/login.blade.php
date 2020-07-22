@@ -19,6 +19,11 @@
                             <strong>Error:</strong> {{ Session::get('error') }}
                         </div>
                         @endif
+                        @if(Session::get('status'))
+                        <div class="alert alert-info" role="alert">
+                            {{ Session::get('status') }}
+                        </div>
+                        @endif
 						<form method="POST" action="{{ route('login_users') }}">
                         @csrf
 							<div class="mt-10">

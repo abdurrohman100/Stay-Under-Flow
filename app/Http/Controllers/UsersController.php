@@ -51,7 +51,7 @@ class UsersController extends Controller
             'user_password' => Hash::make($request->password),
             'user_description' => $request->description
         ]);
-        return redirect(route('login'));
+        return redirect(route('login'))->with('status','Silahkan login dengan akun yang didaftarkan');
     }
 
     public function login_users(Request $request)
