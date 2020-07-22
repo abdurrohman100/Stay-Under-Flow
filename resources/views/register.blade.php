@@ -13,24 +13,49 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-lg-offset-3" style="height: 600px;">
                     <div class="apply_job_form white-bg mt-5">
-						<h3 style="text-align:center" class="mb-30">Register</h3>
+                        <h3 style="text-align:center" class="mb-30">Register</h3>
+                        @if(Session::get('error'))
+                        <div class="alert alert-info" role="alert">
+                            <strong>Error:</strong> {{ Session::get('error') }}
+                        </div>
+                        @endif
 						<form method="POST" action="{{ route('store_users') }}">
                         @csrf
                             <div class="mt-10">
                                 <input type="text" name="username" placeholder="Username" 
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" class="single-input" required>
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" class="single-input" value="{{old('username')}}">
+                                    @error('username')
+                                    <div>
+                                        <small class="text-danger"> {{$message}} </small>
+                                    </div>
+                                    @enderror
                             </div>
                             <div class="mt-10">
 								<input type="email" name="email" placeholder="Email address"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" class="single-input" required>
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" class="single-input" value="{{old('email')}}">
+                                    @error('email')
+                                    <div>
+                                        <small class="text-danger"> {{$message}} </small>
+                                    </div>
+                                    @enderror
 							</div>
 							<div class="mt-10">
 								<input type="password" name="password" placeholder="Password" 
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" class="single-input " required>
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" class="single-input ">
+                                    @error('password')
+                                    <div>
+                                        <small class="text-danger"> {{$message}} </small>
+                                    </div>
+                                    @enderror
                             </div>
                             <div class="mt-10">
 								<input type="password" name="password_confirmation" placeholder="Password Confirmation" 
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Retype Password'" class="single-input " required>
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Retype Password'" class="single-input ">
+                                    @error('password_confirmation')
+                                    <div>
+                                        <small class="text-danger"> {{$message}} </small>
+                                    </div>
+                                    @enderror
 							</div>
                             <input type="hidden" name="description" value="Give some description">
                             <div class="input-group-icon mt-10">

@@ -10,6 +10,7 @@ use Session;
 use App\Discuss;
 class UsersController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -38,11 +39,12 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'username' => 'required',
-        //     'email' => 'required',
-        //     'password' => 'required'
-        // ]);
+        $request->validate([
+            'username' => 'required|min:4',
+            'email' => 'required|email',
+            'password' => 'required|confirmed',
+
+        ]);
         Users::create([
             'user_name' => $request->username,
             'user_email' => $request->email,
@@ -60,6 +62,11 @@ class UsersController extends Controller
         //     return view('dashboards.dashboard', compact('session_data'));
         // }
         // return redirect()->route('login');
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+
+        ]);
 
         $task=Users::where('user_email', $request->email)->first();
         if($task){
@@ -79,7 +86,7 @@ class UsersController extends Controller
                 return redirect('login');
             }
         }else{
-            Session::flash('error', 'Akun anda tidak ditemukan');
+            Session::flash('error', 'Akun anda tidak ditemukan silahkan registrasi');
             return redirect('register');
         }
 
