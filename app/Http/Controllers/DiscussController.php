@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Discuss;
+use App\Answers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Session;
+
 class DiscussController extends Controller
 {
     public function createDiscussion(Request $request){
@@ -39,6 +41,17 @@ class DiscussController extends Controller
         $discussList=Discuss::where('discuss_user_id', $request->session()->get('id'))->get();
         // dd($discussList);
         return view('dashboards.myquestion',compact('discussList'));
+    }
+    public function recentList(Request $request){
+        $recentDiscussList=Discuss::all()->sortBy('updated_at');
+        // dd($discussList);
+        return view('dashboards.dashboard',compact('recentDiscussList'));
+    }
+    public function discussion(Request $request,$dis_id ){
+        $discussion=Discuss::where('discuss_id',$dis_id)->first();
+        $answer=Answers::where('answer_discuss_id',$dis_id)->get()->sortBy('created_at');
+        // dd($answer);
+        return view('dashboards.discussion',compact('discussion','answer'));
     }
     
 

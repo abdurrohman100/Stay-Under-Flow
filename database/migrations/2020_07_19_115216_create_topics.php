@@ -17,7 +17,10 @@ class CreateTopics extends Migration
             $table->bigIncrements('topic_id');
             $table->string('topic_name');
             $table->string('topic_description');
+            $table->string('topic_slug')->nullable();
+            $table->unique('topic_name');
         });
+
     }
 
     /**

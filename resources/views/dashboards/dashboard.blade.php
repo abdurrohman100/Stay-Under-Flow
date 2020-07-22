@@ -13,76 +13,60 @@
 
     <!-- Main content -->
     <section class="content">
-
       <div class="container-fluid">
 
         <div class="row">
           <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                  <h3 class="title">Recently added discussion</h3>
+                </div>
+                <div class="card-body">
+                  <ul class="products-list product-list-in-box">
+                    
+                    @foreach ($recentDiscussList as $discus)
+                    <li class="item">
+                      <div class="card">
+                        <div class="card-header">
+                          <a href="discussion/{{$discus->discuss_id}}" class="product-title">{{ $discus->discuss_title }}</a>
+                          @if ($discus->discuss_status=='1')
+                            <span class="badge badge-pill badge-success float-right">
+                              Solved
+                            </span>
+                          @else
+                            <span class="badge badge-pill badge-danger float-right">
+                              Unsolved
+                            </span>
+                          @endif
+                        </div>
+                        <div class="card-body">
+                          <div class="product-info">
+                            <span class="product-description">{{ $discus->discuss_content  }}</span>
+                          </div>
+                        </div>
+                        <div class="card-footer">
+                          <div class="product-img">
+                            <img src="{{asset('/dist/img/user.jpg')}}" alt="Product Image">
+                            <a href="#" class="product-title">{{ $discus->users->user_name }}</a>
+                          </div>
+                          <span class="float-right">
+                            Last Update : {{$discus->updated_at}}
+                          </span>
+                        </div>
+                      </div>
+                    </li>
+                    @endforeach
+                    <!-- /.item -->
+                  </ul>
+                </div>
+    
+            </div>
             <!-- DISCUSSION LIST -->
             <div class="box box-primary">
-              <div class="box-header with-border">
-                <h3 class="box-title">Recently Added Discussion</h3>
-              </div>
+              
               <!-- /.box-header -->
               <div class="box-body">
-                <ul class="products-list product-list-in-box">
-                  <li class="item">
-                    <div class="product-img">
-                      <img src="{{asset('/dist/img/user.jpg')}}" alt="Product Image">
-                    </div>
-                    <div class="product-info">
-                      <a href="{{ route('discussion') }}" class="product-title">What is mountain?
-                        <span class="label label-success pull-right">Done</span>
-                      </a>
-                      <span class="product-description">
-                            Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                      </span>
-                    </div>
-                  </li>
-                  <!-- /.item -->
-                  <li class="item">
-                    <div class="product-img">
-                      <img src="{{asset('/dist/img/user.jpg')}}" alt="Product Image">
-                    </div>
-                    <div class="product-info">
-                      <a href="#" class="product-title">Title
-                        <span class="label label-danger pull-right">Not Yet</span>
-                      </a>
-                      <span class="product-description">
-                            Description.
-                      </span>
-                    </div>
-                  </li>
-                  <!-- /.item -->
-                  <li class="item">
-                    <div class="product-img">
-                      <img src="{{asset('/dist/img/user.jpg')}}" alt="Product Image">
-                    </div>
-                    <div class="product-info">
-                      <a href="#" class="product-title">Title
-                        <span class="label label-danger pull-right">Not Yet</span>
-                      </a>
-                      <span class="product-description">
-                            Description.
-                      </span>
-                    </div>
-                  </li>
-                  <!-- /.item -->
-                  <li class="item">
-                    <div class="product-img">
-                      <img src="{{asset('/dist/img/user.jpg')}}" alt="Product Image">
-                    </div>
-                    <div class="product-info">
-                      <a href="#" class="product-title">Title
-                        <span class="label label-danger pull-right">Not Yet</span>
-                      </a>
-                      <span class="product-description">
-                            Description.
-                      </span>
-                    </div>
-                  </li>
-                  <!-- /.item -->
-                </ul>
+                
               </div>
               <!-- /.box-body -->
             </div>
@@ -90,7 +74,6 @@
           </div>
           <!-- /.col -->
         </div>
-        <!-- /.row -->
       </div>
       <!-- /.container-fluid -->
 

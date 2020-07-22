@@ -34,8 +34,9 @@ Route::post('/logout/{id}', 'UsersController@logout')->name('logout');
 
 Route::group(['middleware' => 'LoginCheck'], function () {
     Route::get('/user/{id}','UsersController@createListOwnProfile');
-    Route::get('/discussion', function () {return view('dashboards.discussion');}) -> name('discussion');
-    Route::get('/dashboard', function () {return view('dashboards.dashboard');}) -> name('dashboard');
+    Route::get('/discussion/{id}', 'DiscussController@discussion');
+    Route::post('/discussion/{id}', 'AnswersController@sendAnswer')->name('reply');
+    Route::get('/dashboard', 'DiscussController@recentList') -> name('dashboard');
     Route::get('/myquestion', 'DiscussController@createList') -> name('myquestion');
     Route::get('/myanswer', function () {return view('dashboards.myanswer');}) -> name('myanswer');
     Route::get('/create-discussion', function () {return view('dashboards.create-discussion');});

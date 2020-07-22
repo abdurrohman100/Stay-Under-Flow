@@ -16,6 +16,7 @@ class TopicsSeeder extends Seeder
         Topics::create([
             'topic_name' => 'C',
             'topic_description' => 'Membahas C',
+            
         ]);
 
         Topics::create([
@@ -50,5 +51,13 @@ class TopicsSeeder extends Seeder
             'topic_name' => 'Pemrograman AJAX',
             'topic_description' => 'Membahas AJAX',
         ]);
+        
+        // DB::statement('update topic set topic_slug = replace(topic_name, '-',' ' )');
+        // DB::update('UPDATE topics SET topic_slug = ',[REPLACE(topic_name, ' ','-')]);
+        Topics::where('topic_id','>',0)->update(['topic_slug' => DB::raw(" REPLACE(topic_name, ' ','-') " ) ]);
+        // Topics::where()
+        
+        
+        
     }
 }

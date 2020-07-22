@@ -15,6 +15,7 @@ class Discuss extends Model
     {
         return $this->hasMany('App\Answers', 'answer_discuss_id', 'disscus_id');
     }
+    
     public function users()
     {
         return $this->belongsTo('App\Users', 'discuss_user_id', 'user_id');
@@ -24,3 +25,4 @@ class Discuss extends Model
         return $this->belongsTo('App\Topics', 'discuss_topic_id', 'topic_id');
     }
 }
+

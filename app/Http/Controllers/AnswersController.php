@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Answers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Session;
 class AnswersController extends Controller
 {
     /**
@@ -13,6 +13,33 @@ class AnswersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function sendAnswer(Request $request,$dis_id){
+        try {
+            Answers::create(
+            [
+                    'answer_user_id' =>  $request->session()->get('id'),
+                    'answer_discuss_id'=> $dis_id,
+                    'answer_content'=> $request->input('komentar'),
+            ]
+            );
+            // Session::flash('success', "Forum Diskusi Berhasil dibuat");
+            // return redirect('create-discussion');
+            return back();
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+            $errorMsg = $e->errorInfo[2];
+            if ($errorCode == 1062) {
+                return back();;
+            }
+            // Session::flash('error', $errorMsg);
+            return back();;
+            // return view('dashboards.create-discussion');
+        }
+        
+        
+    }
+
     public function index()
     {
         //

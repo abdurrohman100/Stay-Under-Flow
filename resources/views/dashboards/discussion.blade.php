@@ -9,84 +9,81 @@
 <section class="content">
     <div class="row">
       <div class="col-md-12">
-        <!-- Box Comment -->
-        <div class="box box-widget">
-          <div class="box-header with-border">
+        @php
+            
+            // dd($discussion);
+        @endphp
+        <div class="card card-widget">
+          <div class="card-header">
             <div class="user-block">
-              <img class="img-circle" src="{{asset('/dist/img/user.jpg')}}" alt="User Image">
-              <span class="username"><a href="{{ route('userprofile') }}">Username</a></span>
-              <span class="description">7:30 PM Today</span>
+              <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image">
+              <span class="username"><a href="#">{{ $discussion->discuss_title }}</a></span>
+              <span class="description">Shared publicly - {{$discussion->created_at}}</span>
             </div>
-            <!-- /.user-block -->
-            <div class="box-tools">
-              <button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Mark as read"><i class="fa fa-circle-o"></i></button>
-              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            </div>
-            <!-- /.box-tools -->
           </div>
-          <!-- /.box-header -->
-          <div class="box-body">
+          <!-- /.card-header -->
+          <div class="card-body">
             <!-- post text -->
-            <h3 style="margin-top: 5px;">What is mountain?</h3>
-            <p>Far far away, behind the word mountains, far from the
-              countries Vokalia and Consonantia, there live the blind
-              texts. Separated they live in Bookmarksgrove right at 
-              the coast of the Semantics, a large language ocean.
-              A small river named Duden flows by their place and supplies
-              it with the necessary regelialia. It is a paradisematic
-              country, in which roasted parts of sentences fly into
-              your mouth.</p>
+            <p>{{$discussion->discuss_content}}</p>
+
+
+            <!-- Attachment -->
+            {{-- <div class="attachment-block clearfix">
+              <img class="attachment-img" src="../dist/img/photo1.png" alt="Attachment Image">
+
+              <div class="attachment-pushed">
+                <h4 class="attachment-heading"><a href="http://www.lipsum.com/">Lorem ipsum text generator</a></h4>
+
+                <div class="attachment-text">
+                  Description about the attachment can be placed here.
+                  Lorem Ipsum is simply dummy text of the printing and typesetting industry... <a href="#">more</a>
+                </div>
+                <!-- /.attachment-text -->
+              </div>
+              <!-- /.attachment-pushed -->
+            </div> --}}
+            <!-- /.attachment-block -->
 
             <!-- Social sharing buttons -->
-            <span class="pull-right text-muted">2 comments</span>
+            <span class="float-right text-muted">{{ isset($answer)? $answer->count() : "0"}} comments</span>
           </div>
-          <!-- /.box-body -->
-          <div class="box-footer box-comments">
-            <div class="box-comment">
-              <!-- User image -->
-              <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
-
-              <div class="comment-text">
-                    <span class="username">
-                      Maria Gonzales
-                      <span class="text-muted pull-right">8:03 PM Today</span>
-                    </span><!-- /.username -->
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout.
+          <!-- /.card-body -->
+          @if (isset($answer))
+            @foreach ($answer as $answ)
+            <div class="card-footer card-comments">
+              <div class="card-comment">
+                <!-- User image -->
+                <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
+                <div class="comment-text">
+                  <span class="username">
+                    {{$answ->users->user_name}}
+                    <span class="text-muted float-right">{{$answ->created_at}}</span>
+                  </span><!-- /.username -->
+                  {{$answ->answer_content}}
+                </div>
+                <!-- /.comment-text -->
               </div>
-              <!-- /.comment-text -->
+              <!-- /.card-comment -->
             </div>
-            <!-- /.box-comment -->
-            <div class="box-comment">
-              <!-- User image -->
-              <img class="img-circle img-sm" src="../dist/img/user5-128x128.jpg" alt="User Image">
-
-              <div class="comment-text">
-                    <span class="username">
-                      Nora Havisham
-                      <span class="text-muted pull-right">8:03 PM Today</span>
-                    </span><!-- /.username -->
-                The point of using Lorem Ipsum is that it has a more-or-less
-                normal distribution of letters, as opposed to using
-                'Content here, content here', making it look like readable English.
-              </div>
-              <!-- /.comment-text -->
-            </div>
-            <!-- /.box-comment -->
-          </div>
-          <!-- /.box-footer -->
-          <div class="box-footer">
-            <form action="#" method="post">
-              <img class="img-responsive img-circle img-sm" src="{{asset('/dist/img/user.jpg')}}" alt="Alt Text">
-              <!-- .img-push is used to add margin to elements next to floating images -->
+                
+            @endforeach
+          @endif
+          
+          <!-- /.card-footer -->
+          <div class="card-footer">
+            <form action="{{ route('reply',$discussion->discuss_id) }}" method="post" id="loginForm">
+              @csrf
+              <img class="img-fluid img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
               <div class="img-push">
-                <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                <input type="text" name="komentar" class="form-control form-control-sm" placeholder="Press enter to post comment">
               </div>
             </form>
           </div>
-          <!-- /.box-footer -->
+          <!-- /.card-footer -->
         </div>
-        <!-- /.box -->
+
+
+      
       </div>
       <!-- /.col -->
     </div>
@@ -97,6 +94,15 @@
 
 @section('scripts')
     {{--  --}}
+
+<script>
+$('b#loginForm').keypress(function(e){
+if (e.keyCode == 13)
+{
+    $('#loginForm').submit();
+}
+});
+</script>
 @endsection
 
 
