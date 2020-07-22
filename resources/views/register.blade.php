@@ -17,20 +17,20 @@
 						<form method="POST" action="{{ route('store_users') }}">
                         @csrf
                             <div class="mt-10">
-                                <input type="text" name="username" placeholder="Username"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" required class="single-input">
+                                <input type="text" name="username" placeholder="Username" 
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" class="single-input" required>
                             </div>
                             <div class="mt-10">
 								<input type="email" name="email" placeholder="Email address"
-									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" required class="single-input">
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'" class="single-input" required>
 							</div>
 							<div class="mt-10">
 								<input type="password" name="password" placeholder="Password" 
-									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required class="single-input">
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" class="single-input " required>
                             </div>
                             <div class="mt-10">
-								<input type="password" name="password" placeholder="Password Confirmation" 
-									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Retype Password'" required class="single-input">
+								<input type="password" name="password_confirmation" placeholder="Password Confirmation" 
+                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Retype Password'" class="single-input " required>
 							</div>
                             <input type="hidden" name="description" value="Give some description">
                             <div class="input-group-icon mt-10">

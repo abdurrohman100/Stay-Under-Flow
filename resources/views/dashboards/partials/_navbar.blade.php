@@ -53,7 +53,8 @@
               <div class="col-md-12">
                 <div class="row d-flex justify-content-between">
                     <a href="#" class="btn btn-primary">Profil</a>
-                    <a href="#" class="btn btn-danger">Log out</a>
+                    <a class="btn btn-danger" href=" {{route('logout',Session::get('id'))}} " onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
+
                 </div>
 
               </div>
@@ -65,3 +66,6 @@
       
     </ul>
   </nav>
+  <form action="{{route('logout',Session::get('id'))}}" method="post" id="logout-form">
+    @csrf
+  </form>

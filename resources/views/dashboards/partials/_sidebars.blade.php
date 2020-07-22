@@ -125,10 +125,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/myanswer" class="nav-link">
+            <a href=" {{route('logout',Session::get('id'))}} " class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
               <i class="fa fa-sign-out-alt nav-icon"></i>
               <p>Logout</p>
             </a>
+            <form action="{{route('logout',Session::get('id'))}}" method="post" id="logout-form">
+              @csrf
+            </form>
           </li>
         </ul>
     </nav>

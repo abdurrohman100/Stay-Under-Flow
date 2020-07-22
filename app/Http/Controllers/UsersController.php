@@ -38,13 +38,18 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
+        // $request->validate([
+        //     'username' => 'required',
+        //     'email' => 'required',
+        //     'password' => 'required'
+        // ]);
         Users::create([
             'user_name' => $request->username,
             'user_email' => $request->email,
             'user_password' => Hash::make($request->password),
             'user_description' => $request->description
         ]);
-        return redirect()->back();
+        return redirect(route('login'));
     }
 
     public function login_users(Request $request)
@@ -78,6 +83,10 @@ class UsersController extends Controller
             return redirect('register');
         }
 
+    }
+    public function logout($id){
+        Session::flush();
+        return redirect('/');
     }
     public function createListOwnProfile(Request $request,$userId){
         $userData=Users::where('user_id',$userId)->get();

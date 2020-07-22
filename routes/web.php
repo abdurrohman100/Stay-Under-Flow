@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@homeview');
-Route::get('/login', function () {return view('login');}) -> name('login');
-Route::get('/register', function () {return view('register');}) -> name('register');
+Route::get('/login', function () {return view('login');})-> name('login');
+Route::get('/register', function () {return view('register');})-> name('register');
 
 Route::post('/store_users', 'UsersController@store')->name('store_users');
 Route::post('/login_users', 'UsersController@login_users')->name('login_users');
+Route::post('/logout/{id}', 'UsersController@logout')->name('logout');
 
 
 Route::group(['middleware' => 'LoginCheck'], function () {

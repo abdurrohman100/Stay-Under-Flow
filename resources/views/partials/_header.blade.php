@@ -48,7 +48,7 @@
                             <div class="Appointment">
                                 @if(session()->has('login'))
                                 <div class="d-none d-lg-block">
-                                    <form id="logout-form" action="#" method="POST">
+                                    <form id="logout-form" action=" {{route('logout',Session::get('id'))}} " method="POST">
                                         @csrf
                                         <button type="submit" class="btn btn-primary">
                                             {{ __('Logout') }}
