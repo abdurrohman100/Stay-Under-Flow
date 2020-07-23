@@ -30,7 +30,14 @@
                                     </div>
                                 </div>
                                 <div class="col-md-9 content p-2">
-                                <p class="mt-5 h3 font-weight-bold text-warning"><a href="" class="text-decoration-none"> {{Session::get('name')}}</a></p>
+                                    <a href=" {{route('config',Session::get('id'))}} " >
+                                        <span class="text-muted float-right">edit
+                                          <i class="fa fa-edit" aria-hidden="true"></i>
+                                        </span>
+                                      </a>
+                                <p class="mt-5 h3 font-weight-bold text-warning">
+                                    <a href="" class="text-decoration-none"> {{Session::get('name')}}</a>
+                                </p>
                                     <h5 class="my-3">Description :</h5>
                                     <p class="bg-light p-3 rounded">{{Session::get('desc')}}</p>
                                 </div>

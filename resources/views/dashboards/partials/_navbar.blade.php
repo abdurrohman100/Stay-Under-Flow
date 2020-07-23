@@ -34,13 +34,13 @@
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown user user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-          <img src="dist/img/user2-160x160.jpg" class="user-image img-circle elevation-2 alt="User Image">
+          <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="user-image img-circle elevation-2" alt="User Image">
           {{-- <span class="hidden-xs">Alexander Pierce</span> --}}
         </a>
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <!-- User image -->
           <li class="user-header bg-primary">
-            <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             <p>
               {{ Session::get('name') }}
               <small>Member since {{ Session::get('joined') }}</small>
@@ -52,7 +52,7 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="row d-flex justify-content-between">
-                    <a href="#" class="btn btn-primary">Profil</a>
+                  <a href="/user/{{Session::get('id')}}" class="btn btn-primary">Profil</a>
                     <a class="btn btn-danger" href=" {{route('logout',Session::get('id'))}} " onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
 
                 </div>

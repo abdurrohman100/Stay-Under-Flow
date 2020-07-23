@@ -34,6 +34,11 @@ Route::post('/logout/{id}', 'UsersController@logout')->name('logout');
 
 Route::group(['middleware' => 'LoginCheck'], function () {
     Route::get('/user/{id}','UsersController@createListOwnProfile');
+    Route::get('/config/{id}','UsersController@config')->name('config');
+    Route::post('/config/{id}/username','UsersController@configusername')->name('configusername');
+    Route::post('/config/{id}/email','UsersController@configemail')->name('configemail');
+    Route::post('/config/{id}/password','UsersController@configpassword')->name('configpassword');
+    Route::post('/config/{id}/desc','UsersController@configdesc')->name('configdesc');
     Route::get('/discussion/{id}', 'DiscussController@discussion')->name('discussion');
     Route::post('/discussion/{id}', 'AnswersController@sendAnswer')->name('reply');
     Route::put('/discussion/answer/edit/{id}', 'AnswersController@editAnswer')->name('discussion-answer-edit');

@@ -5,7 +5,7 @@
 @section('stylesheets')
 @endsection
 
-@section('content-header',"Welcome {{Session::get('name')}} in Stay Under Flow!")
+@section('content-header',"Welcome ".Session::get('name')." in Stay Under Flow!")
 
 
 @section('content')

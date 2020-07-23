@@ -91,9 +91,55 @@ class UsersController extends Controller
         }
 
     }
+    public function configusername(Request $request,$id){
+        $request->validate([
+            'username' => 'required'
+        ]);
+        Users::where('user_id',$id)->update([
+            'user_name' => $request->username
+        ]);
+        $request->session()->put([
+            'name' => $request->username
+        ]);
+        return redirect()->back()->with('status','Username berhasil diupdate');
+    }
+    public function configemail(Request $request,$id){
+        $request->validate([
+            'email' => 'required'
+        ]);
+        Users::where('user_id',$id)->update([
+            'user_email' => $request->email
+        ]);
+        $request->session()->put([
+            'email' => $request->email
+        ]);
+        return redirect()->back()->with('status','Email berhasil diupdate');
+    }
+    public function configpassword(Request $request,$id){
+        $request->validate([
+            'password' => 'required|confirmed'
+        ]);
+
+        Users::where('user_id',$id)->update([
+            'user_password' => Hash::make($request->password)
+        ]);
+        return redirect()->back()->with('status','Password berhasil diupdate');
+    }
+    public function configdesc(Request $request, $id){
+        $request->validate([
+            'desc' => 'required'
+        ]);
+        Users::where('user_id',$id)->update([
+            'user_description' => $request->desc
+        ]);
+        $request->session()->put([
+            'desc' => $request->desc
+        ]);
+        return redirect()->back()->with('status','Deskripsi berhasil diupdate');
+    }
     public function logout($id){
         Session::flush();
-        return redirect('/');
+        return redirect('/login');
     }
     public function createListOwnProfile(Request $request,$userId){
         $userData=Users::where('user_id',$userId)->get();
@@ -104,6 +150,12 @@ class UsersController extends Controller
         return view('dashboards.userprofile',compact('userData','discussList','discussCount'));
     }
 
+    public function config($id){
+        if($id == Session::get('id')){
+            return view('dashboards.configuser');
+        }
+        return redirect()->back();
+    }
     /**
      * Display the specified resource.
      *
