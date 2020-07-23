@@ -43,7 +43,7 @@
               <div class="input-group mb-3">
                 <input type="text" id="username" name="username" class="form-control" placeholder="username.." aria-label="username" aria-describedby="button-email">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-warning" type="submit" id="button-email">Button</button>
+                  <button class="btn btn-outline-warning" type="submit" id="button-email">Submit</button>
                 </div>
               </div>
               @error('username')

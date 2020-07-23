@@ -43,7 +43,7 @@ class DiscussController extends Controller
         return view('dashboards.myquestion',compact('discussList'));
     }
     public function recentList(Request $request){
-        $recentDiscussList=Discuss::all()->sortBy('updated_at');
+        $recentDiscussList=Discuss::orderBy('updated_at', 'DESC')->paginate(10);
         // dd($discussList);
         return view('dashboards.dashboard',compact('recentDiscussList'));
     }

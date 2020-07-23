@@ -23,7 +23,7 @@
                 </div>
                 <div class="card-body">
                   <ul class="products-list product-list-in-box">
-                    
+                    @if ($recentDiscussList->count() > 0)
                     @foreach ($recentDiscussList as $discus)
                     <li class="item">
                       <div class="card">
@@ -56,6 +56,9 @@
                       </div>
                     </li>
                     @endforeach
+                    @else
+                    <h3 class="title">Tidak ada data.</h3>
+                    @endif
                     <!-- /.item -->
                   </ul>
                 </div>
@@ -73,6 +76,7 @@
             <!-- /.box -->
           </div>
           <!-- /.col -->
+          {{ $recentDiscussList->links() }}
         </div>
       </div>
       <!-- /.container-fluid -->
