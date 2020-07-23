@@ -99,10 +99,8 @@ class UsersController extends Controller
         $userData=Users::where('user_id',$userId)->get();
         // dd($userData);
         $discussList=$userData->first()->discuss;
-        // dd($discussList);
-        // $discussList=Discuss::where('discuss_user_id', $userId)->get();
         $discussCount=$discussList->count();
-        // dd($discussCount);
+        
         return view('dashboards.userprofile',compact('userData','discussList','discussCount'));
     }
 

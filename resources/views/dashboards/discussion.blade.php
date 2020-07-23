@@ -6,11 +6,81 @@
 @endsection
 
 @section('content')
-<section class="content">
-    <div class="row">
-      <div class="col-md-12">
+<section class="content ">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
         <div class="card card-widget">
           <div class="card-header">
+            @if (Session::get('id')== $discussion->discuss_user_id)
+            <a href="" data-toggle="modal" id="editdisc{{ $discussion->discuss_id }}" data-idstd="{{ $discussion->discuss_id }}" data-target="#modal-edit-{{ $discussion->discuss_id }}">
+              <span class="text-muted float-right">edit
+                <i class="fa fa-edit" aria-hidden="true"></i>
+              </span>
+            </a>
+                
+            @endif
+            
+            {{-- Modal --}}
+            <div class="modal fade" id="modal-edit-{{ $discussion->discuss_id }}">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                  <h4 class="modal-title">Edit Discussion {{ $discussion->discuss_title }}</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                  <form id="contact_form" action="{{route('myquestion-edit',$discussion->discuss_id)}}" method="POST" enctype = "multipart/form-data">
+                      {{ csrf_field() }}
+                      {{ method_field('put') }}
+                      <div class="form-group">
+                        <label>Judul Forum</label>
+                        <input type="text" name="judul" class="form-control" value="{{$discussion->discuss_title}}" id="idInputJudul" placeholder="Judul Forum">
+                      </div>
+                      <div class="form-group">
+                          <label for="inputKategori">Topics</label>
+                          <select name="topic" class="form-control" id="inputKategori">
+                              @php
+                                  $listTopics=App\Topics::all();
+                              @endphp
+                              
+                              @foreach ($listTopics as $item)
+                                <option value="{{ $item->topic_id }}" {{  strcmp($item->topic_id,$discussion->topics->topic_id)==0 ? "selected" : "" }}>{{ $item->topic_name}}</option>
+                              @endforeach
+                          </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="inputKategori">Status</label>
+                        <select name="status"  class="form-control" id="inputKategori">
+                            
+                          <option value="0" {{  strcmp("0",$discussion->discuss_status)==0 ? "selected" : "" }}>Unsolved</option>
+                          <option value="1" {{  strcmp("1",$discussion->discuss_status)==0 ? "selected" : "" }}>Solved</option>
+                            
+                        </select>
+                    </div>
+                      
+                      <div class="form-group">
+                          <label for="inputPosition">Pertanyaan</label>
+                          <textarea class="form-control" name="pertanyaan" id="idPertanyaan" cols="30" rows="10">{{$discussion->discuss_content}}</textarea>
+                          {{-- <input type="text" name="position" class="form-control" id="inputPosition" placeholder="Posisi Pekerjaan/jabatan"> --}}
+                      </div>
+                      <button type="submit" id="submitForm" class="btn btn-default">Save</button>
+                  </form>
+                  </div>
+                  <div class="modal-footer justify-content-left">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+                <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
+            </div>
+
+            {{-- Modal --}}
+
+
+
             <div class="user-block">
               <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image">
               <span class="username"><a href="/discussion/{{ $discussion->discuss_id }}">{{ $discussion->discuss_title }}</a></span>
@@ -23,9 +93,6 @@
           <div class="card-body">
             <!-- post text -->
             <p>{{$discussion->discuss_content}}</p>
-            
-
-
             <!-- Attachment -->
             {{-- <div class="attachment-block clearfix">
               <img class="attachment-img" src="../dist/img/photo1.png" alt="Attachment Image">
@@ -48,16 +115,52 @@
           @if (isset($answer))
             @foreach ($answer as $answ)
             <div class="card-footer card-comments">
+              @if (Session::get('id')== $answ->answer_user_id)
+              <a href="" data-toggle="modal" id="editansw{{ $answ->answer_id }}" data-answ="{{ $answ->answer_id }}" data-target="#modal-edit-answ-{{ $answ->answer_id }}">
+                <span class="text-muted float-right">edit
+                  <i class="fa fa-edit" aria-hidden="true"></i>
+                </span>
+              </a>
+              @endif
+              <div class="modal fade" id="modal-edit-answ-{{ $answ->answer_id }}">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                    <h4 class="modal-title">Edit Comments/Answer</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                    <form id="contact_form" action="{{route('discussion-answer-edit',$answ->answer_id)}}" method="POST" enctype = "multipart/form-data">
+                        {{ csrf_field() }}
+                        {{ method_field('put') }}
+                        <div class="form-group">
+                            <label for="inputPosition">Comment</label>
+                            <textarea class="form-control" name="comment" id="idPertanyaan" cols="30" rows="10">{{$answ->answer_content}}</textarea>
+                            {{-- <input type="text" name="position" class="form-control" id="inputPosition" placeholder="Posisi Pekerjaan/jabatan"> --}}
+                        </div>
+                        <button type="submit" id="submitForm" class="btn btn-default">Save</button>
+                    </form>
+                    </div>
+                    <div class="modal-footer justify-content-left">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                  <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+              </div>
               <div class="card-comment">
                 <!-- User image -->
                 <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
                 <div class="comment-text">
                   <span class="username">
                     {{$answ->users->user_name}}
-                    <span class="text-muted float-right">{{$answ->created_at}}</span>
                   </span><!-- /.username -->
                   {{$answ->answer_content}}
                 </div>
+                <span class="text-muted float-right">{{$answ->updated_at}}</span>
                 <!-- /.comment-text -->
               </div>
               <!-- /.card-comment -->

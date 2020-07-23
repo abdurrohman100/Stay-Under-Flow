@@ -24,7 +24,8 @@
                                         <img src="{{asset('/dist/img/user.jpg')}}" alt="user" width="150px" class="img-fluid rounded-circle my-3 border border-warning shadow">
                                         <ul class="list-group">
                                             <li class="list-group-item btn-outline-secondary">Question : <strong>{{$discussCount}}</strong></li>
-                                            <li class="list-group-item btn-outline-secondary">Answer : <strong>9</strong></li>
+                                            
+                                            <li class="list-group-item btn-outline-secondary">Answer : <strong>{{$userData->first()->answers->count()}}</strong></li>
                                           </ul>
                                     </div>
                                 </div>

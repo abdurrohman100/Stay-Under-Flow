@@ -34,13 +34,17 @@ Route::post('/logout/{id}', 'UsersController@logout')->name('logout');
 
 Route::group(['middleware' => 'LoginCheck'], function () {
     Route::get('/user/{id}','UsersController@createListOwnProfile');
-    Route::get('/discussion/{id}', 'DiscussController@discussion');
+    Route::get('/discussion/{id}', 'DiscussController@discussion')->name('discussion');
     Route::post('/discussion/{id}', 'AnswersController@sendAnswer')->name('reply');
+    Route::put('/discussion/answer/edit/{id}', 'AnswersController@editAnswer')->name('discussion-answer-edit');
+    Route::put('/discussion/question/edit/{id}', 'DiscussController@editDiscussion')->name('discussion-question-edit');
     Route::get('/dashboard', 'DiscussController@recentList') -> name('dashboard');
     Route::get('/myquestion', 'DiscussController@createList') -> name('myquestion');
     Route::put('/myquestion/edit/{id}', 'DiscussController@editDiscussion') -> name('myquestion-edit');
     Route::get('/myquestion/hapus/{id}', 'DiscussController@deleteDiscussion') -> name('myquestion-delete');
-    Route::get('/myanswer', function () {return view('dashboards.myanswer');}) -> name('myanswer');
+    Route::get('/myanswer', 'AnswersController@answerList') -> name('myanswer');
+    Route::put('/myanswer/edit/{id}', 'AnswersController@editAnswer') -> name('myanswer-edit');
+    Route::get('/myanswer/hapus/{id}', 'AnswersController@deleteAnswer') -> name('myanswer-delete');
     Route::get('/create-discussion', function () {return view('dashboards.create-discussion');});
     Route::post('/create-discussion', 'DiscussController@createDiscussion') -> name('create-discussion');
 });

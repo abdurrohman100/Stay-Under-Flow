@@ -39,7 +39,30 @@ class AnswersController extends Controller
         
         
     }
+    public function answerList(Request $request){
+        $answerList=Answers::where('answer_user_id',$request->session()->get('id'))->orderBy('created_at')->get();
+        
+        return view('dashboards.myanswer',compact('answerList'));
+    }
 
+    public function editAnswer(Request $request,$answ_id){
+        // dd($request->input('pertanyaan'));
+        // $answ= Discuss::where('discuss_id',$disc_id)->limit(1);
+        $answ= Answers::find($answ_id);
+        $answ->answer_content= $request->input('comment');
+        $answ->save();
+        return back();
+
+    }
+    public function deleteAnswer(Request $request,$answ_id){
+        // dd($request->input('pertanyaan'));
+        // $answ= Discuss::where('discuss_id',$disc_id)->limit(1);
+        $answ= Answers::find($answ_id);
+        $answ->delete();
+        return back();
+
+    }
+    
     public function index()
     {
         //

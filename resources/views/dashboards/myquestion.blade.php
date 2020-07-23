@@ -49,7 +49,6 @@
                                         @php
                                             $listTopics=App\Topics::all();
                                         @endphp
-                                        
                                         @foreach ($listTopics as $item)
                                           <option value="{{ $item->topic_id }}" {{  strcmp($item->topic_id,$discus->topics->topic_id)==0 ? "selected" : "" }}>{{ $item->topic_name}}</option>
                                         @endforeach
