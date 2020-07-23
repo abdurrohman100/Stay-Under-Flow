@@ -47,6 +47,11 @@ class DiscussController extends Controller
         // dd($discussList);
         return view('dashboards.dashboard',compact('recentDiscussList'));
     }
+    public function searchList(Request $request){
+        $searchDiscussList=Discuss::Where('discuss_title', 'like', '%' . $request->search . '%')->orderBy('updated_at', 'DESC')->paginate(10);
+        // dd($discussList);
+        return view('dashboards.search',compact('searchDiscussList'));
+    }
     public function discussion(Request $request,$dis_id ){
         $discussion=Discuss::where('discuss_id',$dis_id)->first();
         

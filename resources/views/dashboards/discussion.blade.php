@@ -1,6 +1,6 @@
 @extends('dashboards.layout')
 
-@section('title', "Dashboard")
+@section('title', "Discussion")
 
 @section('stylesheets')
 @endsection

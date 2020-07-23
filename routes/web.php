@@ -52,4 +52,5 @@ Route::group(['middleware' => 'LoginCheck'], function () {
     Route::get('/myanswer/hapus/{id}', 'AnswersController@deleteAnswer') -> name('myanswer-delete');
     Route::get('/create-discussion', function () {return view('dashboards.create-discussion');});
     Route::post('/create-discussion', 'DiscussController@createDiscussion') -> name('create-discussion');
+    Route::post('/search-discussion', 'DiscussController@searchList') -> name('search-discussion');
 });
