@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 
 class TopicsController extends Controller
 {
+    public function list(){
+        $topicList=Topics::all();
+        // dd($topicList);
+        return view('dashboards.topics-list',compact('topicList'));
+    }
+    public function topicDiscussionList($slug){
+        $topic=Topics::where('topic_slug',$slug)->first();
+        $topicList=$topic->discuss()->paginate(8);
+        // dd($topic);
+        return view('dashboards.discussion-by-topics',compact('topic','topicList'));
+    }
     /**
      * Display a listing of the resource.
      *

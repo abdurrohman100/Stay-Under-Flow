@@ -19,7 +19,7 @@
                             <strong>Error:</strong> {{ Session::get('error') }}
                         </div>
                         @endif
-						<form method="POST" action="{{ route('store_users') }}">
+						<form method="POST" action="{{ route('store_users') }}" enctype='multipart/form-data'>
                         @csrf
                             <div class="mt-10">
                                 <input type="text" name="username" placeholder="Username" 
@@ -56,7 +56,24 @@
                                         <small class="text-danger"> {{$message}} </small>
                                     </div>
                                     @enderror
-							</div>
+                            </div>
+                            <div class="mt-10">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                      <button type="button" id="inputGroupFileAddon03"><i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                                      </button>
+                                    </div>
+                                    <div class="custom-file">
+                                      <input type="file" class="custom-file-input" name="profil" id="berkas" accept=".jpeg,.png,.jpg" aria-describedby="inputGroupFileAddon03">
+                                      <label class="custom-file-label" id='idberkas'for="logo">Upload Profile Image</label>
+                                    </div>
+                                </div>
+                                @error('profil')
+                                    <div>
+                                        <small class="text-danger"> {{$message}} </small>
+                                    </div>
+                                    @enderror
+                            </div>
                             <input type="hidden" name="description" value="Give some description">
                             <div class="input-group-icon mt-10">
                                 <div class="col-lg">

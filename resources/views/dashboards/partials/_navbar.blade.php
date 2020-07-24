@@ -6,13 +6,10 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="/" class="nav-link">Home</a>
+        <a href="/dashboard" class="nav-link {{ Request::is('/dashboard') ? "active" : "" }}">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="/dashboard" class="nav-link">Forum</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Topics</a>
+        <a href="/topics" class="nav-link {{ Request::is('topics') ? "active" : "" }}" >Topics</a>
       </li>
     </ul>
 
@@ -35,13 +32,14 @@
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown user user-menu">
         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-          <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="user-image img-circle elevation-2" alt="User Image">
+          <img src="{{ asset(Session::get('profil')) }}" class="user-image img-circle elevation-2" alt="User Image">
           {{-- <span class="hidden-xs">Alexander Pierce</span> --}}
+         
         </a>
         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <!-- User image -->
           <li class="user-header bg-primary">
-            <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+            <img src="{{ asset(Session::get('profil')) }}" class="img-circle elevation-2" alt="User Image">
             <p>
               {{ Session::get('name') }}
               <small>Member since {{ Session::get('joined') }}</small>

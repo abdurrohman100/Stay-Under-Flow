@@ -3,6 +3,13 @@
 @section('title', "User Profile")
 
 @section('stylesheets')
+<style>
+.no-pointer{
+  cursor: default;  
+
+}
+
+</style>
 
 @endsection
 @section('content-header', "User Profile")
@@ -21,25 +28,27 @@
                             {{-- <div class="col-md-12"> --}}
                                 <div class="col-md-3 menu">
                                     <div class="sidemenu text-center pt-2">
-                                        <img src="{{asset('/dist/img/user.jpg')}}" alt="user" width="150px" class="img-fluid rounded-circle my-3 border border-warning shadow">
+                                        <img src="{{asset($userData->user_image)}}" alt="user" width="150px" class="img-fluid rounded-circle my-3 border border-warning shadow">
                                         <ul class="list-group">
-                                            <a href="{{route('myquestion')}}" class="list-group-item btn-outline-secondary">Question : <strong>{{$discussCount}}</strong> </a>
-                                            
-                                            <a href="{{route('myanswer')}}" class="list-group-item btn-outline-secondary">Answer : <strong>{{$userData->first()->answers->count()}}</strong></a>
+                                            <a href="{{  Session::get('id')==$userData->user_id ? "/myquestion" : "javascript:void(0) " }}"  class="list-group-item btn-outline-secondary {{  Session::get('id')==$userData->user_id ? "" : "no-pointer" }}">Question : <strong>{{$userData->discuss->count()}}</strong> </a>
+                                            <a href="{{  Session::get('id')==$userData->user_id ?  "/myanswer" : "javascript:void(0) " }}" class="list-group-item btn-outline-secondary {{  Session::get('id')==$userData->user_id ? "" : "no-pointer" }}">Answer : <strong>{{$userData->answers->count()}}</strong></a>
                                           </ul>
                                     </div>
                                 </div>
                                 <div class="col-md-9 content p-2">
-                                    <a href=" {{route('config',Session::get('id'))}} " >
-                                        <span class="text-muted float-right">edit
-                                          <i class="fa fa-edit" aria-hidden="true"></i>
-                                        </span>
-                                      </a>
+                                    @if (Session::get('id')==$userData->user_id)
+                                        <a href=" {{route('config',Session::get('id'))}} " >
+                                            <span class="text-muted float-right">edit
+                                            <i class="fa fa-edit" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                    
+                                    @endif
                                 <p class="mt-5 h3 font-weight-bold text-warning">
-                                    <a href="" class="text-decoration-none"> {{Session::get('name')}}</a>
+                                    <a href="/user/{{$userData->user_id}}" class="text-decoration-none"> {{$userData->user_name}}</a>
                                 </p>
                                     <h5 class="my-3">Description :</h5>
-                                    <p class="bg-light p-3 rounded">{{Session::get('desc')}}</p>
+                                    <p class="bg-light p-3 rounded">{{$userData->user_description}}</p>
                                 </div>
     
                             {{-- </div> --}}
@@ -77,7 +86,7 @@
                                 </span>
                             @endif
                             <div class="user-block">
-                                <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image">
+                                <img class="img-circle" src="{{asset($item->users->user_image)}}" alt="User Image">
                                 <span class="username">
                                     <a href="/discussion/{{$item->discuss_id}}">{{$item->discuss_title}}</a>
                                 </span>
@@ -94,10 +103,6 @@
                         </div>
                     </div>
                 @endforeach
-
-                {{-- Question List --}}
-
-
             </div>
         </div>
         {{ $discussList->links() }}

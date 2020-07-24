@@ -84,6 +84,12 @@
               </a>
           </li>
           <li class="nav-item">
+            <a href="/topics" class="nav-link {{ Request::is('topics') ? "active" : "" }}">
+              <i class="fa fa-book nav-icon" aria-hidden="true"></i>
+              <p>Topic</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="/user/{{ Session::get('id')}}" class="nav-link {{ Request::is('user') ? "active" : "" }}">
               <i class="fa fa-user nav-icon"></i>
               <p>My Profile</p>

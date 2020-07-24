@@ -43,15 +43,36 @@ class UsersController extends Controller
             'username' => 'required|min:4',
             'email' => 'required|email',
             'password' => 'required|confirmed',
+            'profil' => 'required|image|mimes:jpeg,png,jpg|max:1024',
 
         ]);
-        Users::create([
-            'user_name' => $request->username,
-            'user_email' => $request->email,
-            'user_password' => Hash::make($request->password),
-            'user_description' => $request->description
-        ]);
-        return redirect(route('login'))->with('status','Silahkan login dengan akun yang didaftarkan');
+        try {
+            $filelogo = $request->file('profil');
+            $extension= $filelogo->getClientOriginalExtension();
+            $tujuan_upload = 'data_users/user_logo/';
+            $namafile= md5($request->email).".".$extension;
+            $filelogo->move($tujuan_upload,$namafile);
+            Users::create([
+                'user_name' => $request->username,
+                'user_email' => $request->email,
+                'user_password' => Hash::make($request->password),
+                'user_description' => $request->description,
+                'user_image' => $tujuan_upload.$namafile,
+            ]);
+            return redirect(route('login'))->with('status','Silahkan login dengan akun yang didaftarkan');
+
+
+        } catch(\Illuminate\Database\QueryException $e)
+        {
+            $errorCode = $e->errorInfo[1];
+            $errorMsg = $e->errorInfo[2];
+            if ($errorCode == 1062) {
+                return redirect('/');
+            }
+            Session::flash('error', $errorMsg);
+            return redirect()->back();
+        }
+        
     }
 
     public function login_users(Request $request)
@@ -78,6 +99,7 @@ class UsersController extends Controller
                     'email' => $task->user_email,
                     'desc' => $task->user_description,
                     'joined' => $task->created_at,
+                    'profil' => $task->user_image,
                 ]);
                 Session::flash('success', 'Anda berhasil Login');
                 return redirect('dashboard');
@@ -142,12 +164,10 @@ class UsersController extends Controller
         return redirect('/login');
     }
     public function createListOwnProfile(Request $request,$userId){
-        $userData=Users::where('user_id',$userId)->get();
+        $userData=Users::where('user_id',$userId)->get()->first();
         // dd($userData);
         $discussList=Discuss::where('discuss_user_id',$userId)->orderBy('updated_at', 'DESC')->paginate(10);
-        $discussCount=Discuss::where('discuss_user_id',$userId)->count();
-        
-        return view('dashboards.userprofile',compact('userData','discussList','discussCount'));
+        return view('dashboards.userprofile',compact('userData','discussList'));
     }
 
     public function config($id){

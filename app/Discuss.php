@@ -13,7 +13,7 @@ class Discuss extends Model
                                  'discuss_content','discuss_title');
     public function answers()
     {
-        return $this->hasMany('App\Answers', 'answer_discuss_id', 'disscus_id');
+        return $this->hasMany('App\Answers', 'answer_discuss_id', 'discuss_id');
     }
     
     public function users()

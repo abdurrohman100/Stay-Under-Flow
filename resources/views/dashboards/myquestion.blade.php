@@ -4,7 +4,7 @@
 
 @section('stylesheets')
 @endsection
-@section('content-header', "My Question")
+@section('content-header',"Welcome ".Session::get('name')." in Stay Under Flow!")
 @section('content')
   <!-- Main content -->
   <section class="content">
@@ -93,7 +93,7 @@
                     </div>
                     <div class="card-body">
                       <div class="product-img">
-                        <img src="{{asset('/dist/img/user.jpg')}}" alt="Product Image">
+                        <img src="{{asset($discus->users->user_image)}}" alt="Product Image">
                       </div>
                       <div class="product-info">
                         <a href="/discussion/{{ $discus->discuss_id }}" class="product-title">{{ $discus->discuss_title }}

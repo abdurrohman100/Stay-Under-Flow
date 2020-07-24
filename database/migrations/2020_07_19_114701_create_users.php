@@ -19,6 +19,7 @@ class CreateUsers extends Migration
             $table->string('user_email');
             $table->string('user_password');
             $table->string('user_description');
+            $table->string('user_image');
             $table->timestamps();
             // $table->timestamp('added_on')->nullable()->default(time());
         });

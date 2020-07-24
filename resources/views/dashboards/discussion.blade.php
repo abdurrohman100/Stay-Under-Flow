@@ -4,12 +4,13 @@
 
 @section('stylesheets')
 @endsection
+@section('content-header',"Welcome ".Session::get('name')." in Stay Under Flow!")
 
 @section('content')
 <section class="content ">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <div class="card card-widget">
+        <div class="card card-widget border-primary">
           <div class="card-header">
             @if (Session::get('id')== $discussion->discuss_user_id)
             <a href="" data-toggle="modal" id="editdisc{{ $discussion->discuss_id }}" data-idstd="{{ $discussion->discuss_id }}" data-target="#modal-edit-{{ $discussion->discuss_id }}">
@@ -82,54 +83,33 @@
             </div>
 
             {{-- Modal --}}
-
-
-
             <div class="user-block">
-              <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image">
+              <img class="img-circle" src="{{asset($discussion->users->user_image)}}" alt="User Image">
               <span class="username"><a href="/discussion/{{ $discussion->discuss_id }}">{{ $discussion->discuss_title }}</a></span>
+              <span class="description"><a href="">{{ $discussion->topics->topic_name }}</a></span>
               <span class="description">Shared publicly - {{$discussion->created_at->diffForHumans()}} by 
-                <a href="user/{{$discussion->discuss_user_id}}">{{$discussion->users->user_name}}</a>
+                <a href="/user/{{$discussion->discuss_user_id}}">{{$discussion->users->user_name}}</a>
               </span>
             </div>
           </div>
           <!-- /.card-header -->
-          <div class="card-body">
+          <div class="card-body" style="border-bottom:1px solid #FF0000">
             <!-- post text -->
             <p>{{$discussion->discuss_content}}</p>
-            <!-- Attachment -->
-            {{-- <div class="attachment-block clearfix">
-              <img class="attachment-img" src="../dist/img/photo1.png" alt="Attachment Image">
-
-              <div class="attachment-pushed">
-                <h4 class="attachment-heading"><a href="http://www.lipsum.com/">Lorem ipsum text generator</a></h4>
-
-                <div class="attachment-text">
-                  Description about the attachment can be placed here.
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry... <a href="#">more</a>
-                </div>
-                <!-- /.attachment-text -->
-              </div>
-              <!-- /.attachment-pushed -->
-            </div> --}}
-            <!-- /.attachment-block -->
             <span class="float-right text-muted">{{ isset($answer)? $answer->count() : "0"}} comments</span>
           </div>
           <!-- /.card-body -->
           @if (isset($answer))
             @foreach ($answer as $answ)
-            <div class="card-footer card-comments">
-              @if (Session::get('id')== $answ->answer_user_id || Session::get('id')== $discussion->discuss_user_id)
-              <a href="" data-toggle="modal" id="editansw{{ $answ->answer_id }}" data-answ="{{ $answ->answer_id }}" data-target="#modal-edit-answ-{{ $answ->answer_id }}">
-                <span class="text-muted float-right">edit
-                  <i class="fa fa-edit" aria-hidden="true"></i>
+            <div class="card-footer card-comments" style="border-bottom:1px solid grey">
+              @if ($answ->answer_status=='1')
+                <span class="badge badge-pill badge-success float-right">
+                  Verified Answer
                 </span>
-              </a>
-              <a href="{{route('myanswer-delete',$answ->answer_id)}}" onclick="return confirm('Are you sure you want to delete this item?');" class="text-muted float-right">
-                <span> Delete
-                  <i class="fa fa-trash" aria-hidden="true"></i>
+              @else
+                <span class="badge badge-pill badge-danger float-right">
+                  No Status
                 </span>
-              </a>
               @endif
               <div class="modal fade" id="modal-edit-answ-{{ $answ->answer_id }}">
                 <div class="modal-dialog">
@@ -175,25 +155,30 @@
               </div>
               <div class="card-comment">
                 <!-- User image -->
-                <img class="img-circle img-sm" src="../dist/img/user3-128x128.jpg" alt="User Image">
+                <img class="img-circle img-sm" src="{{asset($answ->users->user_image)}}" alt="User Image">
                 <div class="comment-text">
                   <span class="username">
                     {{$answ->users->user_name}}
                   </span><!-- /.username -->
                   {{$answ->answer_content}}
                 </div>
-                <span class="text-muted float-right">{{$answ->updated_at->diffForHumans()}}</span>
                 <!-- /.comment-text -->
               </div>
-              @if ($answ->answer_status=='1')
-                <span class="badge badge-pill badge-success float-right">
-                  Verified Answer
+              <span class="text-muted float-left">{{$answ->updated_at->diffForHumans()}}</span>
+
+              @if (Session::get('id')== $answ->answer_user_id || Session::get('id')== $discussion->discuss_user_id)
+              <a href="" data-toggle="modal" id="editansw{{ $answ->answer_id }}" data-answ="{{ $answ->answer_id }}" data-target="#modal-edit-answ-{{ $answ->answer_id }}">
+                <span class="text-muted float-right">edit
+                  <i class="fa fa-edit" aria-hidden="true"></i>
                 </span>
-              @else
-                <span class="badge badge-pill badge-danger float-right">
-                  No Status
+              </a>
+              <a href="{{route('myanswer-delete',$answ->answer_id)}}" onclick="return confirm('Are you sure you want to delete this item?');" class="text-muted float-right">
+                <span> Delete
+                  <i class="fa fa-trash" aria-hidden="true"></i>
                 </span>
+              </a>
               @endif
+              
               <!-- /.card-comment -->
             </div>
                 
@@ -204,7 +189,7 @@
           <div class="card-footer">
             <form action="{{ route('reply',$discussion->discuss_id) }}" method="post" id="loginForm">
               @csrf
-              <img class="img-fluid img-circle img-sm" src="../dist/img/user4-128x128.jpg" alt="Alt Text">
+              <img class="img-fluid img-circle img-sm" src="{{asset(Session::get('profil'))}}" alt="Alt Text">
               <div class="img-push">
                 <input type="text" name="komentar" class="form-control form-control-sm" placeholder="Press enter to post comment">
               </div>

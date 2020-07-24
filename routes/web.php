@@ -29,10 +29,10 @@ Route::get('/register', function () {
 
 Route::post('/store_users', 'UsersController@store')->name('store_users');
 Route::post('/login_users', 'UsersController@login_users')->name('login_users');
-Route::post('/logout/{id}', 'UsersController@logout')->name('logout');
 
 
 Route::group(['middleware' => 'LoginCheck'], function () {
+    Route::post('/logout/{id}', 'UsersController@logout')->name('logout');
     Route::get('/user/{id}','UsersController@createListOwnProfile');
     Route::get('/config/{id}','UsersController@config')->name('config');
     Route::post('/config/{id}/username','UsersController@configusername')->name('configusername');
@@ -53,4 +53,6 @@ Route::group(['middleware' => 'LoginCheck'], function () {
     Route::get('/create-discussion', function () {return view('dashboards.create-discussion');});
     Route::post('/create-discussion', 'DiscussController@createDiscussion') -> name('create-discussion');
     Route::post('/search-discussion', 'DiscussController@searchList') -> name('search-discussion');
+    Route::get('/topics','TopicsController@list');
+    Route::get('/topics/{slug}','TopicsController@topicDiscussionList')->name('topic-discussion');
 });
