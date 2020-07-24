@@ -106,6 +106,7 @@
           </div>
           <!-- /.box-body -->
         </div>
+        {{ $answerList->links() }}
         <!-- /.box -->
       </div>
       <!-- /.col -->

@@ -144,8 +144,8 @@ class UsersController extends Controller
     public function createListOwnProfile(Request $request,$userId){
         $userData=Users::where('user_id',$userId)->get();
         // dd($userData);
-        $discussList=$userData->first()->discuss;
-        $discussCount=$discussList->count();
+        $discussList=Discuss::where('discuss_user_id',$userId)->orderBy('updated_at', 'DESC')->paginate(10);
+        $discussCount=Discuss::where('discuss_user_id',$userId)->count();
         
         return view('dashboards.userprofile',compact('userData','discussList','discussCount'));
     }

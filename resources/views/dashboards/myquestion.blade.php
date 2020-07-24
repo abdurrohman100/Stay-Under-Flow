@@ -130,6 +130,7 @@
           </div>
           <!-- /.box-body -->
         </div>
+        {{ $discussList->links() }}
         <!-- /.box -->
       </div>
       <!-- /.col -->

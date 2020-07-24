@@ -38,7 +38,7 @@ class DiscussController extends Controller
         
     }
     public function createList(Request $request){
-        $discussList=Discuss::where('discuss_user_id', $request->session()->get('id'))->get();
+        $discussList=Discuss::where('discuss_user_id', $request->session()->get('id'))->paginate(10);
         // dd($discussList);
         return view('dashboards.myquestion',compact('discussList'));
     }
@@ -77,7 +77,7 @@ class DiscussController extends Controller
         // $discuss= Discuss::where('discuss_id',$disc_id)->limit(1);
         $discuss= Discuss::find($disc_id);
         $discuss->delete();
-        return back();
+        return redirect(route('myquestion'));
 
     }
     

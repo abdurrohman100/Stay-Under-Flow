@@ -23,9 +23,9 @@
                                     <div class="sidemenu text-center pt-2">
                                         <img src="{{asset('/dist/img/user.jpg')}}" alt="user" width="150px" class="img-fluid rounded-circle my-3 border border-warning shadow">
                                         <ul class="list-group">
-                                            <li class="list-group-item btn-outline-secondary">Question : <strong>{{$discussCount}}</strong></li>
+                                            <a href="{{route('myquestion')}}" class="list-group-item btn-outline-secondary">Question : <strong>{{$discussCount}}</strong> </a>
                                             
-                                            <li class="list-group-item btn-outline-secondary">Answer : <strong>{{$userData->first()->answers->count()}}</strong></li>
+                                            <a href="{{route('myanswer')}}" class="list-group-item btn-outline-secondary">Answer : <strong>{{$userData->first()->answers->count()}}</strong></a>
                                           </ul>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
                             <div class="user-block">
                                 <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image">
                                 <span class="username">
-                                    <a href="#">{{$item->discuss_title}}</a>
+                                    <a href="/discussion/{{$item->discuss_id}}">{{$item->discuss_title}}</a>
                                 </span>
                                 <span class="description"><a href="#">{{$item->topics->topic_name}}</a></span>
                             </div>
@@ -90,15 +90,17 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <span>Last Update: {{$item->updated_at}}</span>
+                            <span>Last Update: {{$item->updated_at->diffForHumans()}}</span>
                         </div>
                     </div>
                 @endforeach
 
                 {{-- Question List --}}
 
+
             </div>
         </div>
+        {{ $discussList->links() }}
     </div>
 </div>
 @endsection

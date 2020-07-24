@@ -40,7 +40,7 @@ class AnswersController extends Controller
         
     }
     public function answerList(Request $request){
-        $answerList=Answers::where('answer_user_id',$request->session()->get('id'))->orderBy('created_at')->get();
+        $answerList=Answers::where('answer_user_id',$request->session()->get('id'))->orderBy('created_at')->paginate(10);
         
         return view('dashboards.myanswer',compact('answerList'));
     }

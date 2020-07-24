@@ -17,7 +17,11 @@
                 <i class="fa fa-edit" aria-hidden="true"></i>
               </span>
             </a>
-                
+            <a href="{{route('myquestion-delete',$discussion->discuss_id)}}" onclick="return confirm('Are you sure you want to delete this item?');" class="text-muted float-right">
+                <span> Delete
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </span>
+            </a>
             @endif
             
             {{-- Modal --}}
@@ -84,7 +88,7 @@
             <div class="user-block">
               <img class="img-circle" src="../dist/img/user1-128x128.jpg" alt="User Image">
               <span class="username"><a href="/discussion/{{ $discussion->discuss_id }}">{{ $discussion->discuss_title }}</a></span>
-              <span class="description">Shared publicly - {{$discussion->created_at}} by 
+              <span class="description">Shared publicly - {{$discussion->created_at->diffForHumans()}} by 
                 <a href="user/{{$discussion->discuss_user_id}}">{{$discussion->users->user_name}}</a>
               </span>
             </div>
@@ -119,6 +123,11 @@
               <a href="" data-toggle="modal" id="editansw{{ $answ->answer_id }}" data-answ="{{ $answ->answer_id }}" data-target="#modal-edit-answ-{{ $answ->answer_id }}">
                 <span class="text-muted float-right">edit
                   <i class="fa fa-edit" aria-hidden="true"></i>
+                </span>
+              </a>
+              <a href="{{route('myanswer-delete',$answ->answer_id)}}" onclick="return confirm('Are you sure you want to delete this item?');" class="text-muted float-right">
+                <span> Delete
+                  <i class="fa fa-trash" aria-hidden="true"></i>
                 </span>
               </a>
               @endif
@@ -160,7 +169,7 @@
                   </span><!-- /.username -->
                   {{$answ->answer_content}}
                 </div>
-                <span class="text-muted float-right">{{$answ->updated_at}}</span>
+                <span class="text-muted float-right">{{$answ->updated_at->diffForHumans()}}</span>
                 <!-- /.comment-text -->
               </div>
               <!-- /.card-comment -->

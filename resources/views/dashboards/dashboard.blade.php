@@ -50,7 +50,7 @@
                             <a href="#" class="product-title">{{ $discus->users->user_name }}</a>
                           </div>
                           <span class="float-right">
-                            Last Update : {{$discus->updated_at}}
+                            Last Update : {{$discus->updated_at->diffForHumans()}}
                           </span>
                         </div>
                       </div>
