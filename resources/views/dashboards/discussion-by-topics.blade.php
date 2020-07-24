@@ -26,7 +26,7 @@
                   <li class="item">
                     <div class="card">
                       <div class="card-header">
-                        <a href="discussion/{{$discus->discuss_id}}" class="product-title">{{ $discus->discuss_title }}</a>
+                        <a href="{{ route('discussion', $discus->discuss_id) }}" class="product-title">{{ $discus->discuss_title }}</a>
                         @if ($discus->discuss_status=='1')
                           <span class="badge badge-pill badge-success float-right">
                             Solved

@@ -124,12 +124,15 @@
                     <form id="contact_form" action="{{route('discussion-answer-edit',$answ->answer_id)}}" method="POST" enctype = "multipart/form-data">
                         {{ csrf_field() }}
                         {{ method_field('put') }}
+                        @if (Session::get('id')== $answ->answer_user_id && Session::get('id')!= $discussion->discuss_user_id)
                         <div class="form-group">
                             <label for="inputPosition">Comment</label>
                             <textarea class="form-control" name="comment" id="idPertanyaan" cols="30" rows="10">{{$answ->answer_content}}</textarea>
-                            {{-- <input type="text" name="position" class="form-control" id="inputPosition" placeholder="Posisi Pekerjaan/jabatan"> --}}
                         </div>
-                        @if (Session::get('id')== $discussion->discuss_user_id)
+                        <input type="hidden" name="status" value="{{$answ->answer_status}}">
+                        @endif
+
+                        @if (Session::get('id')!= $answ->answer_user_id && Session::get('id')== $discussion->discuss_user_id)
                         <div class="form-group">
                         <label for="inputKategori">Status</label>
                         <select name="status"  class="form-control" id="inputKategori">
@@ -139,9 +142,17 @@
                             
                         </select>
                         </div>
-                        @else
+                        <input type="hidden" name="comment" value="{{$answ->answer_content}}">
+                        @endif
+
+                        @if (Session::get('id')== $answ->answer_user_id && Session::get('id')== $discussion->discuss_user_id)
+                        <div class="form-group">
+                            <label for="inputPosition">Comment</label>
+                            <textarea class="form-control" name="comment" id="idPertanyaan" cols="30" rows="10">{{$answ->answer_content}}</textarea>
+                        </div>
                         <input type="hidden" name="status" value="{{$answ->answer_status}}">
                         @endif
+
                         <button type="submit" id="submitForm" class="btn btn-default">Save</button>
                     </form>
                     </div>
