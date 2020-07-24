@@ -49,6 +49,7 @@ class AnswersController extends Controller
         // dd($request->input('pertanyaan'));
         // $answ= Discuss::where('discuss_id',$disc_id)->limit(1);
         $answ= Answers::find($answ_id);
+        $answ->answer_status= $request->input('status');
         $answ->answer_content= $request->input('comment');
         $answ->save();
         return back();

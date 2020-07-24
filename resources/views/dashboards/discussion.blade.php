@@ -62,7 +62,7 @@
                           <option value="1" {{  strcmp("1",$discussion->discuss_status)==0 ? "selected" : "" }}>Solved</option>
                             
                         </select>
-                    </div>
+                      </div>
                       
                       <div class="form-group">
                           <label for="inputPosition">Pertanyaan</label>
@@ -119,7 +119,7 @@
           @if (isset($answer))
             @foreach ($answer as $answ)
             <div class="card-footer card-comments">
-              @if (Session::get('id')== $answ->answer_user_id)
+              @if (Session::get('id')== $answ->answer_user_id || Session::get('id')== $discussion->discuss_user_id)
               <a href="" data-toggle="modal" id="editansw{{ $answ->answer_id }}" data-answ="{{ $answ->answer_id }}" data-target="#modal-edit-answ-{{ $answ->answer_id }}">
                 <span class="text-muted float-right">edit
                   <i class="fa fa-edit" aria-hidden="true"></i>
@@ -149,6 +149,19 @@
                             <textarea class="form-control" name="comment" id="idPertanyaan" cols="30" rows="10">{{$answ->answer_content}}</textarea>
                             {{-- <input type="text" name="position" class="form-control" id="inputPosition" placeholder="Posisi Pekerjaan/jabatan"> --}}
                         </div>
+                        @if (Session::get('id')== $discussion->discuss_user_id)
+                        <div class="form-group">
+                        <label for="inputKategori">Status</label>
+                        <select name="status"  class="form-control" id="inputKategori">
+                            
+                          <option value="0" {{  strcmp("0",$answ->answer_status)==0 ? "selected" : "" }}>No Status</option>
+                          <option value="1" {{  strcmp("1",$answ->answer_status)==0 ? "selected" : "" }}>Verified Answer</option>
+                            
+                        </select>
+                        </div>
+                        @else
+                        <input type="hidden" name="status" value="{{$answ->answer_status}}">
+                        @endif
                         <button type="submit" id="submitForm" class="btn btn-default">Save</button>
                     </form>
                     </div>
@@ -172,6 +185,15 @@
                 <span class="text-muted float-right">{{$answ->updated_at->diffForHumans()}}</span>
                 <!-- /.comment-text -->
               </div>
+              @if ($answ->answer_status=='1')
+                <span class="badge badge-pill badge-success float-right">
+                  Verified Answer
+                </span>
+              @else
+                <span class="badge badge-pill badge-danger float-right">
+                  No Status
+                </span>
+              @endif
               <!-- /.card-comment -->
             </div>
                 
