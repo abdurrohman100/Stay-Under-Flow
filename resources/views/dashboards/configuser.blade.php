@@ -118,6 +118,30 @@
             </form>
           </div>
         </div>
+        <div class="card">
+          <div class="card-header">
+            <h4>Profile Image</h4>
+          </div>
+          <div class="card-body">
+            <form method="POST" action=" {{route('configprofil',Session::get('id'))}} " enctype='multipart/form-data'>
+              @csrf
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="profil" id="berkas" accept=".jpeg,.png,.jpg">
+                    <label class="custom-file-label" id='idberkas'for="logo">Upload Profile Image</label>
+                  </div>
+                </div>
+                @error('profil')
+                <div>
+                    <small class="text-danger"> {{$message}} </small>
+                </div>
+                @enderror
+              </div>
+              <button type="submit" class="btn btn-warning">Submit</button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -128,4 +152,11 @@
 
 @section('scripts')
     {{--  --}}
+    <script type="application/javascript">
+        $('#berkas').change(function(e2){
+            var fileName2 = e2.target.files[0].name;
+            // dd(fileName2);
+            $('#idberkas').html(fileName2);
+        });
+    </script>
 @endsection

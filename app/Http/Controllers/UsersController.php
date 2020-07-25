@@ -77,12 +77,6 @@ class UsersController extends Controller
 
     public function login_users(Request $request)
     {
-        // $task = Users::where('user_email', $request->email) -> where('user_password', $request->password) -> count();
-        // if($task == 1){
-        //     $session_data = Users::where('user_email', $request->email) -> where('user_password', $request->password) -> first();
-        //     return view('dashboards.dashboard', compact('session_data'));
-        // }
-        // return redirect()->route('login');
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -158,6 +152,23 @@ class UsersController extends Controller
             'desc' => $request->desc
         ]);
         return redirect()->back()->with('status','Deskripsi berhasil diupdate');
+    }
+    public function configprofil(Request $request,$id){
+        $request->validate([
+            'profil' => 'required|image|mimes:jpeg,png,jpg'
+        ]);
+        $filelogo = $request->file('profil');
+        $extension= $filelogo->getClientOriginalExtension();
+        $tujuan_upload = 'data_users/user_logo/';
+        $namafile= md5($request->email).".".$extension;
+        $filelogo->move($tujuan_upload,$namafile);
+        Users::where('user_id',$id)->update([
+            'user_image' => $tujuan_upload.$namafile
+        ]);
+        $request->session()->put([
+            'profil' => $tujuan_upload.$namafile
+        ]);
+        return redirect()->back()->with('status','Profile image berhasil diupdate');
     }
     public function logout($id){
         Session::flush();

@@ -46,7 +46,7 @@
                         </div>
                         <div class="card-footer">
                           <div class="product-img">
-                            <img src="{{asset('/dist/img/user.jpg')}}" alt="Product Image">
+                            <img src="{{asset(Session::get('profil'))}}" alt="Product Image">
                             <a href="#" class="product-title">{{ $discus->users->user_name }}</a>
                           </div>
                           <span class="float-right">

@@ -39,6 +39,7 @@ Route::group(['middleware' => 'LoginCheck'], function () {
     Route::post('/config/{id}/email','UsersController@configemail')->name('configemail');
     Route::post('/config/{id}/password','UsersController@configpassword')->name('configpassword');
     Route::post('/config/{id}/desc','UsersController@configdesc')->name('configdesc');
+    Route::post('/config/{id}/profil','UsersController@configprofil')->name('configprofil');
     Route::get('/discussion/{id}', 'DiscussController@discussion')->name('discussion');
     Route::post('/discussion/{id}', 'AnswersController@sendAnswer')->name('reply');
     Route::put('/discussion/answer/edit/{id}', 'AnswersController@editAnswer')->name('discussion-answer-edit');
