@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('title', "Job Portal")
+@section('title', "Stay Underflow")
 
 @section('stylesheets')
 <style>
