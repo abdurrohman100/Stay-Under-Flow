@@ -24,7 +24,7 @@
                             {{ Session::get('status') }}
                         </div>
                         @endif
-						<form method="POST" action="{{ route('login_users') }}" >
+						<form method="POST" action="{{ route('login_users') }}" autocomplete="off" >
                         @csrf
 							<div class="mt-10">
 								<input type="email" name="email" placeholder="Email address"

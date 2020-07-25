@@ -19,7 +19,7 @@
                             <strong>Error:</strong> {{ Session::get('error') }}
                         </div>
                         @endif
-						<form method="POST" action="{{ route('store_users') }}" enctype='multipart/form-data'>
+						<form method="POST" action="{{ route('store_users') }}" enctype='multipart/form-data' autocomplete="off">
                         @csrf
                             <div class="mt-10">
                                 <input type="text" name="username" placeholder="Username" 

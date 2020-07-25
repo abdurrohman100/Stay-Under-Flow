@@ -9,22 +9,14 @@
                             <img src="{{ asset('web_asset') }}/img/logo.png" alt="">
                           </a>
                       </div>
-                      <p>
-                          email@its.ac.id <br>
-                          Kampus ITS, Sukolilo, Jl. Raya ITS, Keputih, Surabaya, Kota SBY, Jawa Timur 60117
-                      </p>
-                      <div class="socail_links">
+                      
+                      {{-- <div class="socail_links">
                           <ul>
                               <li>
                                   <a href="https://id-id.facebook.com/InstitutTeknologiSepuluhNopember/">
                                       <i class="ti-facebook"></i>
                                   </a>
                               </li>
-                              {{-- <li>
-                                  <a href="#">
-                                      <i class="fa fa-google-plus"></i>
-                                  </a>
-                              </li> --}}
                               <li>
                                   <a href="https://twitter.com/its_campus">
                                       <i class="fa fa-twitter"></i>
@@ -36,7 +28,7 @@
                                   </a>
                               </li>
                           </ul>
-                      </div>
+                      </div> --}}
 
                   </div>
               </div>      

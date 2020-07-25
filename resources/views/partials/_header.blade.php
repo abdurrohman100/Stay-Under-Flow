@@ -18,18 +18,6 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a href="/">Home</a></li>
-                                        <li><a href="#">Topics<i class="ti-angle-down"></i></a>
-                                            @php
-                                                $topicslist= App\Topics::all();    
-                                            @endphp
-                                            
-                                            <ul class="submenu">
-                                                @foreach ($topicslist as $item)
-                                                    <li><a href="#">{{ $item->topic_name }}</a></li>
-                                                @endforeach
-                                                
-                                            </ul>
-                                        </li>
                                         @if(session()->has('login'))
                                         <li><a href="/dashboard">Dashboard</a></li>
                                         @else

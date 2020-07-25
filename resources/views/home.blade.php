@@ -174,12 +174,12 @@
     
 
 
-    <div class="popular_catagory_area" style="padding: 50px 0;">
+    {{-- <div class="popular_catagory_area" style="padding: 50px 0;">
         <div class="container">
             <h3>Ayo mulai dari sekarang</h3>
             <p class="quote">"Anda mungkin bisa menunda, tapi waktu tidak akan menunggu"</br> -Benjamin Franklin</p>
         </div>
-    </div>
+    </div> --}}
 
 
 @endsection
