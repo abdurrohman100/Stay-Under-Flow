@@ -86,7 +86,7 @@
             <div class="user-block">
               <img class="img-circle" src="{{asset($discussion->users->user_image)}}" alt="User Image">
               <span class="username"><a href="/discussion/{{ $discussion->discuss_id }}">{{ $discussion->discuss_title }}</a></span>
-              <span class="description"><a href="">{{ $discussion->topics->topic_name }}</a></span>
+              <span class="description"><a href="{{route('topic-discussion',$discussion->topics->topic_slug)}}">{{ $discussion->topics->topic_name }}</a></span>
               <span class="description">Shared publicly - {{$discussion->created_at->diffForHumans()}} by 
                 <a href="/user/{{$discussion->discuss_user_id}}">{{$discussion->users->user_name}}</a>
               </span>
@@ -198,7 +198,7 @@
           
           <!-- /.card-footer -->
           <div class="card-footer">
-            <form action="{{ route('reply',$discussion->discuss_id) }}" method="post" id="loginForm">
+            <form action="{{ route('reply',$discussion->discuss_id) }}" method="post" id="loginForm" autocomplete="off">
               @csrf
               <img class="img-fluid img-circle img-sm" src="{{asset(Session::get('profil'))}}" alt="Alt Text">
               <div class="img-push">

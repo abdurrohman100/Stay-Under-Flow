@@ -14,7 +14,7 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3" method="POST" action="{{route('search-discussion')}}">
+    <form class="form-inline ml-3" method="POST" action="{{route('search-discussion')}}" autocomplete="off">
       @csrf
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" name="search" placeholder="Search" aria-label="Search">

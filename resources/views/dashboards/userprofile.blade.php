@@ -99,7 +99,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <span>Last Update: {{$item->updated_at->diffForHumans()}}</span>
+                            <span>Updated at: {{$item->updated_at->diffForHumans()}}</span>
                         </div>
                     </div>
                 @endforeach

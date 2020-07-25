@@ -41,6 +41,7 @@
                             <form id="contact_form" action="{{route('myanswer-edit',$item->answer_id)}}" method="POST" enctype = "multipart/form-data">
                                 {{ csrf_field() }}
                                 {{ method_field('put') }}
+                                <input type="hidden" name="status" value="{{$item->answer_status}}">
                                 <div class="form-group">
                                     <label for="inputPosition">Comment</label>
                                     <textarea class="form-control" name="comment" id="idPertanyaan" cols="30" rows="10">{{$item->answer_content}}</textarea>

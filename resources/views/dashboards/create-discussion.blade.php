@@ -13,7 +13,7 @@
    
 
   <div class="container-fluid">
-  <form method="POST" role="form" id="quickForm" action="{{ route('create-discussion') }}">
+  <form method="POST" role="form" id="quickForm" action="{{ route('create-discussion') }}" autocomplete="off">
       @csrf
       <div class="row justify-content-center">
           <div class="col-lg-6">
